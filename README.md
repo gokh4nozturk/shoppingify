@@ -85,4 +85,4 @@ $ npm start
 
 ## Contact
 
-- GitHub [@your-username](https://{github.com/gokhannozturk})
+- GitHub [@your-username](https://github.com/gokhannozturk)
