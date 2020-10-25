@@ -1,6 +1,8 @@
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import Axios from "axios";
 import Product from "./Product";
+
+import { Container } from "./styled";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -16,9 +18,11 @@ const Products = () => {
 
   return (
     <div>
-      {products.map((item: any) => (
-        <Product key={item._id} {...item} />
-      ))}
+      <Container>
+        {products.map((item: any) => (
+          <Product key={item._id} {...item} />
+        ))}
+      </Container>
     </div>
   );
 };
