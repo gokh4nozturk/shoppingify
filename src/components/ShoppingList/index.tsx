@@ -1,7 +1,13 @@
 import React from "react";
+import AddItem from "./AddItem";
+import { SLContainer } from "./styled";
 
 const ShoppingList = () => {
-  return <div>Shopping list</div>;
+  return (
+    <SLContainer>
+      <AddItem />
+    </SLContainer>
+  );
 };
 
 export default ShoppingList;

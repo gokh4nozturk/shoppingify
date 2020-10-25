@@ -1,8 +1,18 @@
 import styled from "styled-components";
-import theme from "../../theme/theme";
 
 export const NavContainer = styled.div`
   display: flex;
-  width: 95px;
-  background: ${({ theme }) => theme.colors.primary};
+  flex-direction: column;
+  justify-content: space-between;
+  height: 910px;
+
+  .screens {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 200px;
+
+    .screen-item {
+    }
+  }
 `;
