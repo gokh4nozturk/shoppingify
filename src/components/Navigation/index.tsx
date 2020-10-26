@@ -17,7 +17,9 @@ const Navigation = () => {
         <BiStats size="1.5em" className="screen-item" />
       </div>
       <div className="nav-item cart">
-        <MdShoppingCart size="1.5em" />
+        <span>
+          <MdShoppingCart size="1.5em" />
+        </span>
       </div>
     </NavContainer>
   );
