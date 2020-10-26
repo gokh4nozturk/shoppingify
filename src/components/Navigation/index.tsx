@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Logo } from "../icons/";
 
 import { NavContainer } from "./styled";
@@ -12,9 +13,15 @@ const Navigation = () => {
         <Logo />
       </div>
       <div className="nav-item screens">
-        <MdList size="1.5em" className="screen-item" />
-        <MdReplay size="1.5em" className="screen-item" />
-        <BiStats size="1.5em" className="screen-item" />
+        <Link to={"/"} className="nav-links">
+          <MdList size="1.5em" className="screen-item" />
+        </Link>
+        <Link to={"/history"} className="nav-links">
+          <MdReplay size="1.5em" className="screen-item" />
+        </Link>
+        <Link to={"/statistics"} className="nav-links">
+          <BiStats size="1.5em" className="screen-item" />
+        </Link>
       </div>
       <div className="nav-item cart">
         <span>

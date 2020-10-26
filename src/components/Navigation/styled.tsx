@@ -31,4 +31,8 @@ export const NavContainer = styled.div`
 
     background: ${({ theme }) => theme.colors.primary};
   }
+  .nav-links {
+    text-decoration: none;
+    color: #454545;
+  }
 `;
