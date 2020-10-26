@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const HSContainer = styled.div`
+export const STContainer = styled.div`
   display: flex;
 `;

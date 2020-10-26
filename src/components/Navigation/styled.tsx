@@ -6,6 +6,7 @@ export const NavContainer = styled.div`
   justify-content: space-between;
   height: 965px;
   padding: 5px;
+  background: #000;
 
   .nav-item {
     display: flex;
@@ -22,7 +23,7 @@ export const NavContainer = styled.div`
     .screen-item {
     }
   }
-  .cart span {
+  .cart div {
     display: grid;
     place-items: center;
     width: 42px;
@@ -34,5 +35,23 @@ export const NavContainer = styled.div`
   .nav-links {
     text-decoration: none;
     color: #454545;
+  }
+
+  .cart {
+    position: relative;
+  }
+
+  .cart-badge {
+    display: grid;
+    place-items: center;
+    position: absolute;
+    width: 19px;
+    height: 18px;
+    color: #fff;
+    border-radius: 5px;
+    left: 28px;
+    top: 0;
+
+    background: ${({ theme }) => theme.colors.red};
   }
 `;

@@ -24,9 +24,10 @@ const Navigation = () => {
         </Link>
       </div>
       <div className="nav-item cart">
-        <span>
+        <div>
           <MdShoppingCart size="1.5em" />
-        </span>
+        </div>
+        <span className="cart-badge">3</span>
       </div>
     </NavContainer>
   );

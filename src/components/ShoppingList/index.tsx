@@ -1,11 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import AddItem from "./AddItem";
+import List from "./List";
 import { SLContainer } from "./styled";
 
 const ShoppingList = () => {
+  const [toggle, setToggle] = useState(false);
+
+  const toggleControl = () => {
+    setToggle(!toggle);
+  };
   return (
     <SLContainer>
-      <AddItem />
+      {toggle ? (
+        <AddItem ClickHandler={toggleControl} />
+      ) : (
+        <List ClickHandler={toggleControl} />
+      )}
     </SLContainer>
   );
 };
