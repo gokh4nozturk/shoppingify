@@ -4,9 +4,10 @@ export const NavContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 965px;
-  padding: 5px;
-  background: #000;
+  background: #fff;
+  width: 70px;
+  height: 958px;
+  padding: 10px 0px;
 
   .nav-item {
     display: flex;
@@ -49,7 +50,7 @@ export const NavContainer = styled.div`
     height: 18px;
     color: #fff;
     border-radius: 5px;
-    left: 28px;
+    left: 48px;
     top: 0;
 
     background: ${({ theme }) => theme.colors.red};
