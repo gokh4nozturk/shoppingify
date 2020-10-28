@@ -7,8 +7,8 @@ export const HomeContainer = styled.section`
   max-width: 100%;
   max-height: 100%;
   margin: 0 auto;
-  /* background: ${({ theme }) => theme.colors.secondary}; */
-  background: black;
+  background: ${({ theme }) => theme.colors.secondary};
+  /* background: black; */
 
   .home-item {
     margin: 0;
