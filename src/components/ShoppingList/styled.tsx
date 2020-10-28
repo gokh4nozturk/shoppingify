@@ -204,6 +204,9 @@ export const AddItemContainer = styled.div`
 
       font-weight: 700;
     }
+    .buttons:hover {
+      cursor: pointer;
+    }
 
     .btn-cancel {
       color: #34333a;
