@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Product from "./Product";
 
-import { Container } from "./styled";
+import { ProductsContainer } from "./styled";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,13 +17,11 @@ const Products = () => {
   }, []);
 
   return (
-    <div>
-      <Container>
-        {products.map((item: any) => (
-          <Product key={item._id} {...item} />
-        ))}
-      </Container>
-    </div>
+    <ProductsContainer>
+      {products.map((item: any) => (
+        <Product key={item._id} {...item} />
+      ))}
+    </ProductsContainer>
   );
 };
 

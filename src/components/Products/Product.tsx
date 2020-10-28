@@ -1,12 +1,13 @@
 import React from "react";
 
+import { ContainerProduct } from "./styled";
+
 const Product = ({ ...item }) => {
   return (
-    <div>
-      <div>
-        <p>{item.name}</p>
-      </div>
-    </div>
+    <ContainerProduct>
+      <p>{item.name}</p>
+      <button className="btn-add-to-list">+</button>
+    </ContainerProduct>
   );
 };
 
