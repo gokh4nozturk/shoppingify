@@ -50,7 +50,7 @@ export const NavContainer = styled.div`
     height: 18px;
     color: #fff;
     border-radius: 5px;
-    left: 48px;
+    left: 46px;
     top: 0;
 
     background: ${({ theme }) => theme.colors.red};

@@ -29,8 +29,18 @@ const List = (Props: ToggleProps) => {
       </ListNoItems>
 
       <ListSave className="list-items">
-        <input type="text" name="" id="" />
-        <button type="submit">Save</button>
+        <div className="save-container">
+          <input
+            className="text-box-list"
+            type="text"
+            name=""
+            id=""
+            placeholder="Enter a name"
+          />
+          <button className="btn-save-list" type="submit">
+            Save
+          </button>
+        </div>
       </ListSave>
     </ListContainer>
   );

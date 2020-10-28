@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const SLContainer = styled.div`
   display: flex;
   flex-direction: column;
-  background: #fff0de;
   width: 390px;
   height: 978px;
 `;
@@ -13,13 +12,13 @@ export const AddItemContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  background: #fff0de;
   padding: 20px;
 `;
 
 export const ListContainer = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 295px 1fr 130px;
+  background: #fff0de;
 `;
 
 export const ListAddItem = styled.div`
@@ -90,9 +89,43 @@ export const ListNoItems = styled.div`
 
 export const ListSave = styled.div`
   grid-row: 3/4;
-  display: flex;
-  justify-content: center;
-  background: #fff;
+  display: grid;
+  place-items: center;
   width: 100%;
-  height: 100%;
+  height: 130px;
+  background: #fff;
+
+  .save-container {
+    display: flex;
+    justify-content: center;
+    width: 310px;
+    height: 64px;
+    border: 2px solid #c1c1c4;
+    box-sizing: border-box;
+    border-radius: ${({ theme }) => theme.radius.secondary};
+  }
+
+  .text-box-list {
+    display: flex;
+    width: 220px;
+    height: 60px;
+    border: 0;
+    color: #bdbdbd;
+    box-sizing: border-box;
+
+    font-size: ${({ theme }) => theme.fontSizes.medium};
+    border-radius: ${({ theme }) => theme.radius.secondary};
+  }
+
+  .btn-save-list {
+    height: 35px;
+    border: 0;
+    width: 90px;
+    height: 60px;
+    color: #fff;
+    box-sizing: border-box;
+    background: #c1c1c4;
+
+    border-radius: ${({ theme }) => theme.radius.secondary};
+  }
 `;
