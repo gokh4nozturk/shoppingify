@@ -206,6 +206,8 @@ export const AddItemContainer = styled.div`
     }
     .buttons:hover {
       cursor: pointer;
+      font-size: 18px;
+      transition-delay: 15ms;
     }
 
     .btn-cancel {
