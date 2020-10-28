@@ -54,6 +54,10 @@ export const ListAddItem = styled.div`
       border-radius: ${({ theme }) => theme.radius.secondary};
       font-size: ${({ theme }) => theme.fontSizes.small};
     }
+
+    .btn-add-item:hover {
+      cursor: pointer;
+    }
   }
 `;
 

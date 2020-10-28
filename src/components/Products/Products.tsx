@@ -18,6 +18,9 @@ const Products = () => {
 
   return (
     <ProductsContainer>
+      <div className="products-top">
+        Shoppingify allows you take your shopping list wherever you go
+      </div>
       {products.map((item: any) => (
         <Product key={item._id} {...item} />
       ))}

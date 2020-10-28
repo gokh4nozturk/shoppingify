@@ -5,7 +5,7 @@ import { ContainerProduct } from "./styled";
 const Product = ({ ...item }) => {
   return (
     <ContainerProduct>
-      <p>{item.name}</p>
+      <p className="product-name">{item.name}</p>
       <button className="btn-add-to-list">+</button>
     </ContainerProduct>
   );
