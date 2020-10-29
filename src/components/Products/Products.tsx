@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import Product from "./Product";
 
-import { ProductsContainer } from "./styled";
+import { ProductsContainer, ProductsView } from "./styled";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -21,9 +21,11 @@ const Products = () => {
       <div className="products-top">
         Shoppingify allows you take your shopping list wherever you go
       </div>
-      {products.map((item: any) => (
-        <Product key={item._id} {...item} />
-      ))}
+      <ProductsView>
+        {products.map((item: any) => (
+          <Product key={item._id} {...item} />
+        ))}
+      </ProductsView>
     </ProductsContainer>
   );
 };

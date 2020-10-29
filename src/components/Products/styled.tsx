@@ -2,19 +2,26 @@ import styled from "styled-components";
 
 export const ProductsContainer = styled.div`
   width: 100%;
+  display: grid;
+  grid-template-rows: 150px 1fr;
+  grid-gap: 1rem;
+`;
+
+export const ProductsView = styled.main`
+  grid-row: 2/3;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 `;
 
 export const ContainerProduct = styled.div`
-  flex: 0 1 150px; /*  No stretching: */
-  margin: 5px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 182px;
+  width: 180px;
   height: 100%;
+  margin: 5px;
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
