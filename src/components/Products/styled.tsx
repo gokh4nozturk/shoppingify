@@ -2,23 +2,26 @@ import styled from "styled-components";
 
 export const ProductsContainer = styled.div`
   width: 100%;
-  display: grid;
-  grid-template-rows: 150px 1fr;
+  display: inline-grid;
+  grid-template-rows: 150px 1fr 1fr;
   grid-gap: 1rem;
   height: 978px;
-  width: 100%;
+
+  .categoriess {
+    grid-row: 3/4;
+  }
 `;
 
 export const ProductsTop = styled.div`
   grid-row: 1/2;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   width: 100%;
 
   .title {
     grid-column: 1/2;
-    display: flex;
+    display: inline-flex;
     align-items: center;
 
     .shoppingify {
@@ -37,14 +40,13 @@ export const ProductsTop = styled.div`
 
 export const ProductsView = styled.div`
   grid-row: 2/3;
-  display: grid;
+  display: inline-grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  overflow-y: auto;
 `;
 
 export const ContainerProduct = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;

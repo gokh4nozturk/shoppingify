@@ -24,6 +24,7 @@ const AddItem = (Props: ToggleProps) => {
             name=""
             id="name-item"
             placeholder="Enter a name"
+            required
             onFocus={() => {
               setToggle(false);
             }}
@@ -75,6 +76,7 @@ const AddItem = (Props: ToggleProps) => {
             name=""
             id="image-item"
             placeholder="Enter a category"
+            required
             onFocus={() => {
               setToggle(true);
             }}

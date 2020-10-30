@@ -12,16 +12,17 @@ export const HomeContainer = styled.section`
 
   .home-item {
     margin: 0;
+    width: 100%;
   }
   .part-nav {
-    grid: 1/2;
+    grid-column: 1/2;
     display: flex;
     align-items: flex-start;
   }
   .part-products {
-    grid: 2/3;
+    grid-column: 2/3;
   }
   .part-shopping-list {
-    grid: 3/4;
+    grid-column: 3/4;
   }
 `;

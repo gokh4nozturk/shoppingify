@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const NavContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   justify-content: space-between;
   background: #fff;
@@ -10,13 +10,13 @@ export const NavContainer = styled.div`
   padding: 10px 0px;
 
   .nav-item {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
   }
 
   .screens {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     justify-content: space-between;
     height: 200px;
@@ -25,7 +25,7 @@ export const NavContainer = styled.div`
     }
   }
   .cart div {
-    display: grid;
+    display: inline-grid;
     place-items: center;
     width: 42px;
     height: 42px;
@@ -43,7 +43,7 @@ export const NavContainer = styled.div`
   }
 
   .cart-badge {
-    display: grid;
+    display: inline-grid;
     place-items: center;
     position: absolute;
     width: 19px;

@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const SLContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   width: 390px;
   height: 978px;
 `;
 
 export const ListContainer = styled.div`
-  display: grid;
+  display: inline-grid;
   grid-template-rows: 295px 1fr 130px;
   background: #fff0de;
   height: 100%;
@@ -16,7 +16,7 @@ export const ListContainer = styled.div`
 
 export const ListAddItem = styled.div`
   grid-row: 1/2;
-  display: grid;
+  display: inline-grid;
   grid-template-columns: 120px 1fr;
   place-items: center;
   position: relative;
@@ -63,20 +63,20 @@ export const ListAddItem = styled.div`
 
 export const ListNoItems = styled.div`
   grid-row: 2/3;
-  display: grid;
+  display: inline-grid;
   grid-template-rows: 1fr 1fr;
   margin: 40px;
   margin-bottom: 0;
 
   .no-items-p {
     grid: 1/2;
-    display: grid;
+    display: inline-grid;
     place-items: center;
   }
 
   .no-items-logo {
     grid: 2/3;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: flex-end;
     padding: 0;
@@ -86,14 +86,14 @@ export const ListNoItems = styled.div`
 
 export const ListSave = styled.div`
   grid-row: 3/4;
-  display: grid;
+  display: inline-grid;
   place-items: center;
   width: 100%;
   height: 130px;
   background: #fff;
 
   .save-container {
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     width: 310px;
     height: 64px;
@@ -103,7 +103,7 @@ export const ListSave = styled.div`
   }
 
   .text-box-list {
-    display: flex;
+    display: inline-flex;
     width: 220px;
     height: 60px;
     border: 0;
@@ -128,7 +128,7 @@ export const ListSave = styled.div`
 `;
 
 export const AddItemContainer = styled.div`
-  display: grid;
+  display: inline-grid;
   grid-template-rows: 60px 1fr 190px 130px;
   height: 100%;
 
@@ -143,7 +143,7 @@ export const AddItemContainer = styled.div`
   .add-item-form {
     grid-row: 2/3;
     margin-top: 50px;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     font-weight: 500;
     box-sizing: border-box;
@@ -197,7 +197,7 @@ export const AddItemContainer = styled.div`
 
   .add-item-btn-container {
     grid-row: 4/5;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: center;
 
