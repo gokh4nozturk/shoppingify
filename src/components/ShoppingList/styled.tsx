@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const SLContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
-  width: 390px;
-  height: 978px;
+  height: 100%;
+  width: 100%;
 `;
 
 export const ListContainer = styled.div`

@@ -5,7 +5,8 @@ export const ProductsContainer = styled.div`
   display: inline-grid;
   grid-template-rows: 150px 1fr 1fr;
   grid-gap: 1rem;
-  height: 978px;
+  height: 100%;
+  width: 100%;
 
   .categoriess {
     grid-row: 3/4;

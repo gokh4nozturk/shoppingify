@@ -13,14 +13,17 @@ export const HomeContainer = styled.section`
   .home-item {
     margin: 0;
     width: 100%;
+    height: 978px;
   }
   .part-nav {
     grid-column: 1/2;
     display: flex;
     align-items: flex-start;
+    padding: 10px 0px;
   }
   .part-products {
     grid-column: 2/3;
+    padding: 0 60px;
   }
   .part-shopping-list {
     grid-column: 3/4;

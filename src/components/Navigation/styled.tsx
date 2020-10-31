@@ -5,9 +5,8 @@ export const NavContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   background: #fff;
-  width: 70px;
-  height: 958px;
-  padding: 10px 0px;
+  height: 100%;
+  width: 100%;
 
   .nav-item {
     display: inline-flex;
