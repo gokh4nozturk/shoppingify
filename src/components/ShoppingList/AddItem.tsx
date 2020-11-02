@@ -5,7 +5,7 @@ interface ToggleProps {
   ClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const AddItem = (Props: ToggleProps) => {
+const AddItem = ({ ClickHandler }: ToggleProps) => {
   const [toggle, setToggle] = useState(false);
 
   return (
@@ -19,6 +19,7 @@ const AddItem = (Props: ToggleProps) => {
           <br />
           <br />
 
+          {/* styled.input`margin-bottom:10px;` */}
           <input
             type="text"
             name=""
@@ -92,7 +93,7 @@ const AddItem = (Props: ToggleProps) => {
       )}
 
       <div className="add-item-btn-container">
-        <button className="btn-cancel buttons" onClick={Props.ClickHandler}>
+        <button className="btn-cancel buttons" onClick={ClickHandler}>
           Cancel
         </button>
         <button className="btn-save buttons" type="submit">

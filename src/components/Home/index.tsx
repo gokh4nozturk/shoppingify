@@ -11,12 +11,6 @@ import { HomeContainer } from "./styled";
 import { ProductType } from "../Products/Product";
 
 const Home = () => {
-  const [product, setProduct] = useState<ProductType[]>([]);
-
-  const handleProducts = (item: ProductType) => {
-    setProduct([item]);
-  };
-
   return (
     <Router>
       <HomeContainer>
@@ -25,15 +19,13 @@ const Home = () => {
         </div>
         <Switch>
           <div className="part-products home-item">
-            <Route path="/" exact component={Products}>
-              <Products handleProducts={handleProducts} />
-            </Route>
+            <Route path="/" exact component={Products} />
             <Route path="/history" component={History} />
             <Route path="/statistics" component={Statistics} />
           </div>
         </Switch>
         <div className="part-shopping-list home-item">
-          <ShoppingList product={product} />
+          <ShoppingList />
         </div>
       </HomeContainer>
     </Router>

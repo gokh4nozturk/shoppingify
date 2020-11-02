@@ -1,48 +1,22 @@
-import React, { useEffect, useState } from "react";
-import Axios from "axios";
-import Product, { ProductType } from "./Product";
+import React, { useContext, useMemo, useState } from "react";
+import Product from "./Product";
 
 import { ProductsContainer, ProductsView, ProductsTop } from "./styled";
+import { ProductType, Shopping } from "../../context";
 
-type ResponseType = undefined | ProductType[];
+const Products = () => {
+  const [filter, setFilter] = useState("");
+  const { products, categories, addToCart } = useContext(Shopping);
 
-interface Props {
-  handleProducts: (item: ProductType) => void;
-}
-
-const Products = ({ handleProducts }: Props) => {
-  const [products, setProducts] = useState<ProductType[]>([]);
-  const [categories, setCategories] = useState<string[]>([]);
-
-  const fetchData = async () => {
-    const newProducts: ResponseType = await Axios.get(`/api/products`)
-      .then((res) => res.data)
-      .catch((e) => {
-        console.log(e);
-      });
-
-    if (!newProducts) return;
-
-    const productCategories = newProducts.reduce<string[]>((state, cur) => {
-      const { category } = cur;
-      const isInState = state.includes(category);
-      if (isInState) {
-        return state;
-      }
-      return [...state, category];
-    }, []);
-
-    setCategories(productCategories);
-    setProducts(newProducts);
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
-  const handleProduct = (item: ProductType) => {
-    handleProducts(item);
-  };
+  // products from filter that is selected or not
+  const filteredProducts: ProductType[] = useMemo(() => {
+    // Check if there is a filter
+    if (!filter) {
+      return products;
+    }
+    // if no filter
+    return products.filter((product) => product.category === filter);
+  }, [filter, products]);
 
   return (
     <ProductsContainer>
@@ -56,16 +30,23 @@ const Products = ({ handleProducts }: Props) => {
           <input type="search" name="" id="" />
         </div>
       </ProductsTop>
-      <ProductsView>
-        {products.map((item) => (
-          <Product key={item._id} handleProduct={handleProduct} {...item} />
-        ))}
-      </ProductsView>
       <div className="categoriess">
+        {/* Mapping categories for filtering */}
         {categories.map((item) => (
-          <p>{item}</p>
+          <p
+            onClick={() => {
+              setFilter(filter === item ? "" : item);
+            }}
+          >
+            {item}
+          </p>
         ))}
       </div>
+      <ProductsView>
+        {filteredProducts.map((item) => (
+          <Product key={item._id} onClick={addToCart} {...item} />
+        ))}
+      </ProductsView>
     </ProductsContainer>
   );
 };

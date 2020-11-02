@@ -11,17 +11,17 @@ export interface ProductType {
 }
 
 export interface Props extends ProductType {
-  handleProduct: (item: ProductType) => void;
+  onClick: (item: ProductType) => void;
 }
 
-const Product = ({ handleProduct, ...item }: Props) => {
+const Product = ({ onClick, ...item }: Props) => {
   return (
     <ContainerProduct>
       <p className="product-name">{item.name}</p>
       <button
         className="btn-add-to-list"
         onClick={() => {
-          handleProduct(item);
+          onClick(item);
         }}
       >
         +

@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { ListContainer, ListAddItem, ListNoItems, ListSave } from "./styled";
 
 import { Source, UndrawShoppingApp } from "../icons/";
+import { Shopping } from "../../context";
 
-interface ToggleProps {
-  ClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+interface Props {
+  onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const List = (Props: ToggleProps) => {
+const List = ({ onToggle }: Props) => {
+  const { cart } = useContext(Shopping);
   return (
     <ListContainer>
       <ListAddItem className="list-items">
@@ -15,18 +17,26 @@ const List = (Props: ToggleProps) => {
         <div className="add-item-space"></div>
         <div className="add-item-btn-p">
           <p className="p-add-item">Didn't find what you need?</p>
-          <button className="btn-add-item" onClick={Props.ClickHandler}>
+          <button className="btn-add-item" onClick={onToggle}>
             Add Item
           </button>
         </div>
       </ListAddItem>
 
-      <ListNoItems className="list-items">
-        <div className="no-items-p">No Items</div>
-        <div className="no-items-logo">
-          <UndrawShoppingApp />
+      {cart.length > 0 ? (
+        <div>
+          {cart.map((item) => {
+            return <p>{item.name}</p>;
+          })}
         </div>
-      </ListNoItems>
+      ) : (
+        <ListNoItems className="list-items">
+          <div className="no-items-p">No Items</div>
+          <div className="no-items-logo">
+            <UndrawShoppingApp />
+          </div>
+        </ListNoItems>
+      )}
 
       <ListSave className="list-items">
         <div className="save-container">
