@@ -6,7 +6,11 @@ import { ProductsContainer, ProductsView, ProductsTop } from "./styled";
 
 type ResponseType = undefined | ProductType[];
 
-const Products = () => {
+interface Props {
+  handleProducts: (item: ProductType) => void;
+}
+
+const Products = ({ handleProducts }: Props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
 
@@ -36,6 +40,10 @@ const Products = () => {
     fetchData();
   }, []);
 
+  const handleProduct = (item: ProductType) => {
+    handleProducts(item);
+  };
+
   return (
     <ProductsContainer>
       <ProductsTop className="products-top">
@@ -50,7 +58,7 @@ const Products = () => {
       </ProductsTop>
       <ProductsView>
         {products.map((item) => (
-          <Product key={item._id} {...item} />
+          <Product key={item._id} handleProduct={handleProduct} {...item} />
         ))}
       </ProductsView>
       <div className="categoriess">

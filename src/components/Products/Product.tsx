@@ -10,13 +10,22 @@ export interface ProductType {
   image?: string;
 }
 
-interface Props extends ProductType {}
+export interface Props extends ProductType {
+  handleProduct: (item: ProductType) => void;
+}
 
-const Product = ({ ...item }: Props) => {
+const Product = ({ handleProduct, ...item }: Props) => {
   return (
     <ContainerProduct>
       <p className="product-name">{item.name}</p>
-      <button className="btn-add-to-list">+</button>
+      <button
+        className="btn-add-to-list"
+        onClick={() => {
+          handleProduct(item);
+        }}
+      >
+        +
+      </button>
     </ContainerProduct>
   );
 };
