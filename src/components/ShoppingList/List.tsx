@@ -1,5 +1,17 @@
 import React, { useContext } from "react";
-import { ListContainer, ListAddItem, ListNoItems, ListSave } from "./styled";
+import {
+  ListContainer,
+  ListAddItem,
+  ListFullItems,
+  ListNoItems,
+  ListSave,
+  ListFullItemsTitle,
+  Title,
+  CartItemContainer,
+  CartItemName,
+  CartItemNumber,
+  CartItemOperation,
+} from "./styled";
 
 import { Source, UndrawShoppingApp } from "../icons/";
 import { Shopping } from "../../context";
@@ -12,9 +24,9 @@ const List = ({ onToggle }: Props) => {
   const { cart } = useContext(Shopping);
   return (
     <ListContainer>
-      <ListAddItem className="list-items">
+      <ListAddItem>
         <Source className="add-item-logo" />
-        <div className="add-item-space"></div>
+        <div className="add-item-space" />
         <div className="add-item-btn-p">
           <p className="p-add-item">Didn't find what you need?</p>
           <button className="btn-add-item" onClick={onToggle}>
@@ -24,13 +36,25 @@ const List = ({ onToggle }: Props) => {
       </ListAddItem>
 
       {cart.length > 0 ? (
-        <div>
+        <ListFullItems>
+          <ListFullItemsTitle>
+            <Title>Shopping List</Title>
+            <button>Edit</button>
+          </ListFullItemsTitle>
           {cart.map((item) => {
-            return <p>{item.name}</p>;
+            return (
+              <CartItemContainer>
+                <CartItemName>{item.name}</CartItemName>
+                <CartItemNumber>3 psc</CartItemNumber>
+                <CartItemOperation>
+                  <p>operation</p>
+                </CartItemOperation>
+              </CartItemContainer>
+            );
           })}
-        </div>
+        </ListFullItems>
       ) : (
-        <ListNoItems className="list-items">
+        <ListNoItems>
           <div className="no-items-p">No Items</div>
           <div className="no-items-logo">
             <UndrawShoppingApp />
@@ -38,7 +62,7 @@ const List = ({ onToggle }: Props) => {
         </ListNoItems>
       )}
 
-      <ListSave className="list-items">
+      <ListSave>
         <div className="save-container">
           <input
             className="text-box-list"

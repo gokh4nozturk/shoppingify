@@ -9,7 +9,7 @@ export const SLContainer = styled.div`
 
 export const ListContainer = styled.div`
   display: inline-grid;
-  grid-template-rows: 295px 1fr 130px;
+  grid-template-rows: 200px 1fr 130px;
   background: #fff0de;
   height: 100%;
 `;
@@ -61,6 +61,54 @@ export const ListAddItem = styled.div`
   }
 `;
 
+export const ListFullItems = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: 0 40px;
+`;
+
+export const ListFullItemsTitle = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+`;
+
+export const Title = styled.p`
+  font-weight: 700;
+  text-align: left;
+
+  font-size: ${({ theme }) => theme.fontSizes.large};
+`;
+
+export const CartItemContainer = styled.div`
+  display: inline-flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  font-weight: 500;
+
+  font-size: ${({ theme }) => theme.fontSizes.large};
+`;
+export const CartItemName = styled.p`
+  margin: 0;
+`;
+
+export const CartItemNumber = styled.span`
+  padding: 5px 10px;
+
+  color: ${({ theme }) => theme.colors.primary};
+  font-size: ${({ theme }) => theme.fontSizes.small};
+  border: 2px solid ${({ theme }) => theme.colors.primary};
+  border-radius: ${({ theme }) => theme.radius.primary};
+`;
+export const CartItemOperation = styled.div`
+  color: white;
+  display: block;
+
+  &:hover {
+    color: red;
+  }
+`;
+
 export const ListNoItems = styled.div`
   grid-row: 2/3;
   display: inline-grid;
@@ -99,6 +147,7 @@ export const ListSave = styled.div`
     height: 64px;
     border: 2px solid #c1c1c4;
     box-sizing: border-box;
+
     border-radius: ${({ theme }) => theme.radius.secondary};
   }
 

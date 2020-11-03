@@ -18,9 +18,9 @@ export default {
   button: {
     style: {
       color: {
-        primary: "#3DB46D",
-        secondary: "#EB5757",
-        thirty: "transparent",
+        primary: "#F9A109",
+        secondary: "#C1C1C4",
+        thirty: " #56CCF2",
         ghost: "transparent",
       },
       text: {
@@ -36,10 +36,8 @@ export default {
         ghost: "1px solid black",
       },
       size: {
-        xLarge: "300px",
-        large: "200px",
-        default: "100px",
-        small: "50px",
+        large: "120px",
+        small: "90px",
       },
     },
   },

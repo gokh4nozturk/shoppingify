@@ -3,8 +3,6 @@ import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
 import App from "./App";
 
-import "./index.css";
-
 import GlobalStyles from "./theme/globalStyles";
 import Theme from "./theme/theme";
 
