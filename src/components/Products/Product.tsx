@@ -8,6 +8,7 @@ export interface ProductType {
   category: string;
   note: string;
   image?: string;
+  count: number;
 }
 
 export interface Props extends ProductType {

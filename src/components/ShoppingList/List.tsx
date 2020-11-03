@@ -45,7 +45,7 @@ const List = ({ onToggle }: Props) => {
             return (
               <CartItemContainer>
                 <CartItemName>{item.name}</CartItemName>
-                <CartItemNumber>3 psc</CartItemNumber>
+                <CartItemNumber>{`${item.count} pcs`}</CartItemNumber>
                 <CartItemOperation>
                   <p>operation</p>
                 </CartItemOperation>

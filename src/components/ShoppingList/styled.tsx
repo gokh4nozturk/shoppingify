@@ -102,7 +102,7 @@ export const CartItemNumber = styled.span`
 `;
 export const CartItemOperation = styled.div`
   color: white;
-  display: block;
+  display: none;
 
   &:hover {
     color: red;

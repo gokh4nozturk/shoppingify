@@ -7,6 +7,7 @@ export interface ProductType {
   category: string;
   note: string;
   image?: string;
+  count: number;
 }
 
 export type ShoppingType = {
@@ -45,7 +46,21 @@ const Provider: React.FC<{}> = (props) => {
 
   const addToCart: ShoppingType["addToCart"] = useCallback(
     (item) => {
-      setCart([...cart, item]);
+      const cartItem = cart.slice();
+      let alreadyInCart = false; //check!! is there already product in cart if add to cart the product
+      cartItem.forEach((el) => {
+        if (el._id === item._id) {
+          el.count++;
+          alreadyInCart = true;
+          console.log("ok");
+        }
+      });
+      if (!alreadyInCart) {
+        //if there is not the product, add to cart
+        cartItem.push({ ...item, count: 1 });
+      }
+
+      setCart([...cartItem]);
     },
     [cart]
   );
