@@ -1,22 +1,22 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Shopping } from "../../context";
 
+import { CartAddItem } from "./style/styleAddItem";
 import {
-  ListContainer,
-  ListAddItem,
-  ListFullItems,
-  ListNoItems,
-  ListSave,
-  ListFullItemsTitle,
+  CartContainer,
+  CartFullItems,
+  CartNoItems,
+  CartSave,
+  CartFullItemsTitle,
   Title,
   CartItemContainer,
   CartItemName,
   CartItemNumber,
   CartItemOperation,
   CartItemCheckBox,
-} from "./styled";
+} from "./style/styleCart";
 
-import { Source, UndrawShoppingApp } from "../icons/";
+import { Source, UndrawShoppingApp } from "../icons";
 import { FaPencilAlt } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
@@ -42,8 +42,8 @@ const List = ({ onToggle }: Props) => {
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
 
   return (
-    <ListContainer>
-      <ListAddItem>
+    <CartContainer>
+      <CartAddItem>
         <Source className="add-item-logo" />
         <div className="add-item-space" />
         <div className="add-item-btn-p">
@@ -52,11 +52,11 @@ const List = ({ onToggle }: Props) => {
             Add Item
           </button>
         </div>
-      </ListAddItem>
+      </CartAddItem>
 
       {cart.length > 0 ? (
-        <ListFullItems>
-          <ListFullItemsTitle>
+        <CartFullItems>
+          <CartFullItemsTitle>
             <Title>Shopping List</Title>
             <button
               className="on-toggle-edit-btn"
@@ -66,7 +66,7 @@ const List = ({ onToggle }: Props) => {
             >
               <FaPencilAlt />
             </button>
-          </ListFullItemsTitle>
+          </CartFullItemsTitle>
           {cart.map((item) => {
             return (
               <CartItemContainer>
@@ -123,31 +123,31 @@ const List = ({ onToggle }: Props) => {
               </CartItemContainer>
             );
           })}
-        </ListFullItems>
+        </CartFullItems>
       ) : (
-        <ListNoItems>
+        <CartNoItems>
           <div className="no-items-p">No Items</div>
           <div className="no-items-logo">
             <UndrawShoppingApp />
           </div>
-        </ListNoItems>
+        </CartNoItems>
       )}
 
-      <ListSave>
+      <CartSave>
         <div className={`save-container ${isThereAnyClassContainer}`}>
           <input
-            className="text-box-list"
+            className="text-box-cart"
             type="text"
             name=""
             id=""
             placeholder="Enter a name"
           />
-          <button className={`btn-save-list ${isThereAnyClass}`} type="submit">
+          <button className={`btn-save-cart ${isThereAnyClass}`} type="submit">
             Save
           </button>
         </div>
-      </ListSave>
-    </ListContainer>
+      </CartSave>
+    </CartContainer>
   );
 };
 export default List;

@@ -1,105 +1,80 @@
-import React, { useState } from "react";
-import { AddItemContainer } from "./styled";
+import React, { useContext } from "react";
+import { Shopping } from "../../context";
+import {
+  AddItemContainer,
+  BtnContainer,
+  FormContainer,
+  InputContainer,
+  InputElement,
+  OptionCategories,
+  SelectCategories,
+  TitleAddItem,
+} from "./style/styleAddItem";
 
-interface ToggleProps {
-  ClickHandler: (event: React.MouseEvent<HTMLButtonElement>) => void;
+interface Props {
+  onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const AddItem = ({ ClickHandler }: ToggleProps) => {
-  const [toggle, setToggle] = useState(false);
+const AddItem = ({ onToggle }: Props) => {
+  const { categories } = useContext(Shopping);
 
   return (
     <AddItemContainer>
-      <div className="add-item-title">
+      <TitleAddItem className="add-item-title">
         <p>Add a new item</p>
-      </div>
-      <div className="add-item-form">
-        <form action="" method="post" className="form">
+      </TitleAddItem>
+      <FormContainer action="" method="post" className="form">
+        <InputContainer>
           <label htmlFor="name-item">Name</label>
-          <br />
-          <br />
 
           {/* styled.input`margin-bottom:10px;` */}
-          <input
+          <InputElement
             type="text"
             name=""
             id="name-item"
             placeholder="Enter a name"
             required
-            onFocus={() => {
-              setToggle(false);
-            }}
           />
-          <br />
-          <br />
-          <br />
-          <br />
+        </InputContainer>
+        <InputContainer>
           <label htmlFor="note-item">Note (optional)</label>
-          <br />
-          <br />
 
-          <input
+          <InputElement
             type="text"
             name=""
             id="note-item"
             placeholder="Enter a note"
-            onFocus={() => {
-              setToggle(false);
-            }}
           />
-          <br />
-          <br />
-          <br />
-          <br />
+        </InputContainer>
+        <InputContainer>
           <label htmlFor="image-item">Image (optional)</label>
-          <br />
-          <br />
 
-          <input
+          <InputElement
             type="text"
             name=""
             id="image-item"
             placeholder="Enter a url"
-            onFocus={() => {
-              setToggle(false);
-            }}
           />
-          <br />
-          <br />
-          <br />
-          <br />
+        </InputContainer>
+        <InputContainer>
           <label htmlFor="image-item">Category</label>
-          <br />
-          <br />
 
-          <input
-            type="text"
-            name=""
-            id="image-item"
-            placeholder="Enter a category"
-            required
-            onFocus={() => {
-              setToggle(true);
-            }}
-          />
-        </form>
-      </div>
-      {toggle && (
-        <div className="dropdown-categories">
-          <p>dfkgfdlk</p>
-          <p>dfkgfdlk</p>
-          <p>dfkgfdlk</p>
-        </div>
-      )}
+          <SelectCategories name="" id="category-item" required>
+            {categories.map((item) => {
+              return <OptionCategories value={item}>{item}</OptionCategories>;
+            })}
+          </SelectCategories>
+        </InputContainer>
+      </FormContainer>
 
-      <div className="add-item-btn-container">
-        <button className="btn-cancel buttons" onClick={ClickHandler}>
+      <BtnContainer>
+        <button className="btn-cancel buttons" onClick={onToggle}>
           Cancel
         </button>
         <button className="btn-save buttons" type="submit">
           Save
         </button>
-      </div>
+      </BtnContainer>
     </AddItemContainer>
   );
 };
