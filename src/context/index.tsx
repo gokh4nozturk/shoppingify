@@ -15,10 +15,12 @@ export type ShoppingType = {
   cart: ProductType[];
   categories: string[];
   onToggleOverview: boolean;
+  onToggleAddItem: boolean;
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType) => void;
   removeFromCart: (item: ProductType) => void;
-  isControlToggle: () => void;
+  isControlToggleOverview: () => void;
+  isControlToggleAddItem: () => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -26,10 +28,12 @@ const DefaultShopping: ShoppingType = {
   cart: [],
   categories: [],
   onToggleOverview: false,
+  onToggleAddItem: false,
   addProduct: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
-  isControlToggle: () => {},
+  isControlToggleOverview: () => {},
+  isControlToggleAddItem: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -41,6 +45,7 @@ const Provider: React.FC<{}> = (props) => {
   const [cart, setCart] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
+  const [onToggleAddItem, setOnToggleAddItem] = useState<boolean>(false);
 
   const addProduct: ShoppingType["addProduct"] = useCallback(
     (item) => {
@@ -52,7 +57,8 @@ const Provider: React.FC<{}> = (props) => {
   const addToCart: ShoppingType["addToCart"] = useCallback(
     (item) => {
       const cartItem = cart.slice();
-      let alreadyInCart = false; //check!! is there already product in cart if add to cart the product
+      //check!! is there already product in cart if add to cart the product
+      let alreadyInCart = false;
       cartItem.forEach((el) => {
         if (el._id === item._id) {
           el.count++;
@@ -78,8 +84,13 @@ const Provider: React.FC<{}> = (props) => {
     [cart]
   );
 
-  const isControlToggle: ShoppingType["isControlToggle"] = () => {
+  const isControlToggleOverview: ShoppingType["isControlToggleOverview"] = () => {
     setOnToggleOverview(!onToggleOverview);
+    setOnToggleAddItem(false);
+  };
+  const isControlToggleAddItem: ShoppingType["isControlToggleAddItem"] = () => {
+    setOnToggleAddItem(!onToggleAddItem);
+    setOnToggleOverview(false);
   };
 
   const fetchData = async () => {
@@ -115,10 +126,12 @@ const Provider: React.FC<{}> = (props) => {
         cart,
         categories,
         onToggleOverview,
+        onToggleAddItem,
         addProduct,
         addToCart,
         removeFromCart,
-        isControlToggle,
+        isControlToggleOverview,
+        isControlToggleAddItem,
       }}
     >
       {props.children}

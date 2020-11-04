@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Shopping } from "../../context";
 
 import { ContainerProduct } from "./styled";
 
@@ -16,9 +17,12 @@ export interface Props extends ProductType {
 }
 
 const Product = ({ onClick, ...item }: Props) => {
+  const { isControlToggleOverview } = useContext(Shopping);
   return (
     <ContainerProduct>
-      <p className="product-name">{item.name}</p>
+      <p className="product-name" onClick={isControlToggleOverview}>
+        {item.name}
+      </p>
       <button
         className="btn-add-to-list"
         onClick={() => {

@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import AddItem from "./AddItem";
-import List from "./Cart";
+import Cart from "./Cart";
 
 import styled from "styled-components";
 import { Shopping } from "../../context";
@@ -14,16 +14,13 @@ const SLContainer = styled.div`
 `;
 
 const ShoppingList = () => {
-  const [toggle, setToggle] = useState(false);
-  const { onToggleOverview } = useContext(Shopping);
-
-  const toggleControl = () => {
-    setToggle(!toggle);
-  };
+  const { onToggleOverview, onToggleAddItem } = useContext(Shopping);
 
   return (
     <SLContainer>
-      {onToggleOverview ? <Overview /> : <List onToggle={toggleControl} />}
+      {onToggleOverview && <Overview />}
+      {onToggleAddItem && <AddItem />}
+      {!onToggleAddItem && !onToggleOverview && <Cart />}
     </SLContainer>
   );
 };

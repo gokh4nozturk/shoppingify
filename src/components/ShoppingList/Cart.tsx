@@ -21,12 +21,8 @@ import { FaPencilAlt } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
 
-interface Props {
-  onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-const List = ({ onToggle }: Props) => {
-  const { cart, removeFromCart } = useContext(Shopping);
+const List = () => {
+  const { cart, removeFromCart, isControlToggleAddItem } = useContext(Shopping);
   const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [completed, setCompleted] = useState(false);
@@ -48,7 +44,7 @@ const List = ({ onToggle }: Props) => {
         <div className="add-item-space" />
         <div className="add-item-btn-p">
           <p className="p-add-item">Didn't find what you need?</p>
-          <button className="btn-add-item" onClick={onToggle}>
+          <button className="btn-add-item" onClick={isControlToggleAddItem}>
             Add Item
           </button>
         </div>

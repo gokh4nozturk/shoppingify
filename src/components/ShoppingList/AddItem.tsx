@@ -11,12 +11,8 @@ import {
   TitleAddItem,
 } from "./style/styleAddItem";
 
-interface Props {
-  onToggle: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-const AddItem = ({ onToggle }: Props) => {
-  const { categories } = useContext(Shopping);
+const AddItem = () => {
+  const { categories, isControlToggleAddItem } = useContext(Shopping);
 
   return (
     <AddItemContainer>
@@ -71,7 +67,10 @@ const AddItem = ({ onToggle }: Props) => {
           </SelectCategories>
         </InputContainer>
         <BtnContainer>
-          <button className="btn-cancel buttons" onClick={onToggle}>
+          <button
+            className="btn-cancel buttons"
+            onClick={isControlToggleAddItem}
+          >
             Cancel
           </button>
           <button className="btn-save buttons" type="submit">
