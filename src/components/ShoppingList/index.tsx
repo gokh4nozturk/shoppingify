@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AddItem from "./AddItem";
 import List from "./Cart";
 
 import styled from "styled-components";
+import { Shopping } from "../../context";
+import Overview from "./Overview";
 
 const SLContainer = styled.div`
   display: inline-flex;
@@ -13,6 +15,7 @@ const SLContainer = styled.div`
 
 const ShoppingList = () => {
   const [toggle, setToggle] = useState(false);
+  const { onToggleOverview } = useContext(Shopping);
 
   const toggleControl = () => {
     setToggle(!toggle);
@@ -20,11 +23,7 @@ const ShoppingList = () => {
 
   return (
     <SLContainer>
-      {toggle ? (
-        <AddItem onToggle={toggleControl} />
-      ) : (
-        <List onToggle={toggleControl} />
-      )}
+      {onToggleOverview ? <Overview /> : <List onToggle={toggleControl} />}
     </SLContainer>
   );
 };

@@ -14,7 +14,9 @@ import { ProductType, Shopping } from "../../context";
 
 const Products = () => {
   const [filter, setFilter] = useState("");
-  const { products, categories, addToCart } = useContext(Shopping);
+  const { products, categories, addToCart, isControlToggle } = useContext(
+    Shopping
+  );
 
   // products from filter that is selected or not
   const filteredProducts: ProductType[] = useMemo(() => {
@@ -49,7 +51,7 @@ const Products = () => {
           </ProductsCategory>
         ))}
       </ProductsCategories>
-      <ProductsView>
+      <ProductsView onClick={isControlToggle}>
         {filteredProducts.map((item) => (
           <Product key={item._id} onClick={addToCart} {...item} />
         ))}

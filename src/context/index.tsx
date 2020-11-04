@@ -14,18 +14,22 @@ export type ShoppingType = {
   products: ProductType[];
   cart: ProductType[];
   categories: string[];
+  onToggleOverview: boolean;
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType) => void;
   removeFromCart: (item: ProductType) => void;
+  isControlToggle: () => void;
 };
 
 const DefaultShopping: ShoppingType = {
   products: [],
   cart: [],
   categories: [],
+  onToggleOverview: false,
   addProduct: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
+  isControlToggle: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -36,6 +40,7 @@ const Provider: React.FC<{}> = (props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [cart, setCart] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
 
   const addProduct: ShoppingType["addProduct"] = useCallback(
     (item) => {
@@ -73,6 +78,10 @@ const Provider: React.FC<{}> = (props) => {
     [cart]
   );
 
+  const isControlToggle: ShoppingType["isControlToggle"] = () => {
+    setOnToggleOverview(!onToggleOverview);
+  };
+
   const fetchData = async () => {
     const newProducts: ResponseType = await Axios.get(`/api/products`)
       .then((res) => res.data)
@@ -105,9 +114,11 @@ const Provider: React.FC<{}> = (props) => {
         products,
         cart,
         categories,
+        onToggleOverview,
         addProduct,
         addToCart,
         removeFromCart,
+        isControlToggle,
       }}
     >
       {props.children}
