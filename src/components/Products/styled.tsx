@@ -1,15 +1,29 @@
 import styled from "styled-components";
 
 export const ProductsContainer = styled.div`
-  width: 100%;
   display: inline-grid;
-  grid-template-rows: 150px 1fr 1fr;
+  grid-template-rows: 6rem 10% 1fr;
   grid-gap: 1rem;
   height: 100%;
   width: 100%;
+`;
 
-  .categoriess {
-    grid-row: 3/4;
+export const ProductsCategories = styled.div`
+  grid-row: 2/3;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
+  border-radius: 2em;
+`;
+
+export const ProductsCategory = styled.div`
+  padding: 0.5em 1em;
+  border-radius: 12px;
+  &:hover {
+    cursor: pointer;
+    background: #c1c1c4;
   }
 `;
 
@@ -19,31 +33,27 @@ export const ProductsTop = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
   width: 100%;
+`;
 
-  .title {
-    grid-column: 1/2;
-    display: inline-flex;
-    align-items: center;
+export const ProductsTitle = styled.div`
+  grid-column: 1/2;
+  display: inline-flex;
+  align-items: center;
 
-    .shoppingify {
-      color: ${({ theme }) => theme.colors.primary};
-    }
+  .shoppingify {
+    color: ${({ theme }) => theme.colors.primary};
   }
-
-  .title p {
-    display: inline;
-  }
-
-  .search-box {
-    grid-column: 2/3;
-  }
+`;
+export const SearchBox = styled.div`
+  grid-column: 2/3;
 `;
 
 export const ProductsView = styled.div`
-  grid-row: 2/3;
+  grid-row: 3/4;
   display: inline-grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  height: 5em;
 `;
 
 export const ContainerProduct = styled.div`
@@ -51,18 +61,23 @@ export const ContainerProduct = styled.div`
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  height: 100%;
+  height: 4rem;
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
 
   .btn-add-to-list {
-    height: 25px;
-    width: 25px;
-    font-size: 20px;
+    height: 1.5em;
+    width: 1.5em;
+    font-size: 1.4em;
     color: #c1c1c4;
     border: 0;
     background: #ffffff;
+  }
+
+  .product-name {
+    padding: 0;
+    margin: 0;
   }
 
   .btn-add-to-list:hover {

@@ -1,7 +1,15 @@
 import React, { useContext, useMemo, useState } from "react";
 import Product from "./Product";
 
-import { ProductsContainer, ProductsView, ProductsTop } from "./styled";
+import {
+  ProductsContainer,
+  ProductsView,
+  ProductsTop,
+  ProductsCategories,
+  ProductsCategory,
+  ProductsTitle,
+  SearchBox,
+} from "./styled";
 import { ProductType, Shopping } from "../../context";
 
 const Products = () => {
@@ -20,28 +28,27 @@ const Products = () => {
 
   return (
     <ProductsContainer>
-      <ProductsTop className="products-top">
-        <div className="title">
+      <ProductsTop>
+        <ProductsTitle className="title">
           <p className="shoppingify">Shoppingify </p>
-          {"  "}
           <p> allows you take your shopping list wherever you go</p>
-        </div>
-        <div className="search-box">
+        </ProductsTitle>
+        <SearchBox className="search-box">
           <input type="search" name="" id="" />
-        </div>
+        </SearchBox>
       </ProductsTop>
-      <div className="categoriess">
+      <ProductsCategories>
         {/* Mapping categories for filtering */}
         {categories.map((item) => (
-          <p
+          <ProductsCategory
             onClick={() => {
               setFilter(filter === item ? "" : item);
             }}
           >
             {item}
-          </p>
+          </ProductsCategory>
         ))}
-      </div>
+      </ProductsCategories>
       <ProductsView>
         {filteredProducts.map((item) => (
           <Product key={item._id} onClick={addToCart} {...item} />
