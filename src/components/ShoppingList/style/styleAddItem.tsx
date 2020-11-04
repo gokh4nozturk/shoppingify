@@ -49,7 +49,7 @@ export const CartAddItem = styled.div`
 
 export const AddItemContainer = styled.div`
   display: inline-grid;
-  grid-template-rows: 60px 1fr 130px;
+  grid-template-rows: 60px 1fr;
   height: 100%;
 `;
 
@@ -118,10 +118,10 @@ export const OptionCategories = styled.option`
 `;
 
 export const BtnContainer = styled.div`
-  grid-row: 3/4;
   display: inline-flex;
   justify-content: center;
   align-items: center;
+  margin-top: 4em;
 
   .buttons {
     height: 61px;

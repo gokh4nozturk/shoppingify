@@ -23,14 +23,19 @@ const AddItem = ({ onToggle }: Props) => {
       <TitleAddItem className="add-item-title">
         <p>Add a new item</p>
       </TitleAddItem>
-      <FormContainer action="" method="post" className="form">
+      <FormContainer
+        action="/api/product"
+        method="post"
+        target="_blank"
+        className="form"
+      >
         <InputContainer>
           <label htmlFor="name-item">Name</label>
 
           {/* styled.input`margin-bottom:10px;` */}
           <InputElement
             type="text"
-            name=""
+            name="name"
             id="name-item"
             placeholder="Enter a name"
             required
@@ -41,7 +46,7 @@ const AddItem = ({ onToggle }: Props) => {
 
           <InputElement
             type="text"
-            name=""
+            name="note"
             id="note-item"
             placeholder="Enter a note"
           />
@@ -51,7 +56,7 @@ const AddItem = ({ onToggle }: Props) => {
 
           <InputElement
             type="text"
-            name=""
+            name="image"
             id="image-item"
             placeholder="Enter a url"
           />
@@ -59,22 +64,21 @@ const AddItem = ({ onToggle }: Props) => {
         <InputContainer>
           <label htmlFor="image-item">Category</label>
 
-          <SelectCategories name="" id="category-item" required>
+          <SelectCategories name="category" id="category-item" required>
             {categories.map((item) => {
               return <OptionCategories value={item}>{item}</OptionCategories>;
             })}
           </SelectCategories>
         </InputContainer>
+        <BtnContainer>
+          <button className="btn-cancel buttons" onClick={onToggle}>
+            Cancel
+          </button>
+          <button className="btn-save buttons" type="submit">
+            Save
+          </button>
+        </BtnContainer>
       </FormContainer>
-
-      <BtnContainer>
-        <button className="btn-cancel buttons" onClick={onToggle}>
-          Cancel
-        </button>
-        <button className="btn-save buttons" type="submit">
-          Save
-        </button>
-      </BtnContainer>
     </AddItemContainer>
   );
 };
