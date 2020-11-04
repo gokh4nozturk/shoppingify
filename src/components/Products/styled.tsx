@@ -51,7 +51,7 @@ export const SearchBox = styled.div`
 export const ProductsView = styled.div`
   grid-row: 3/4;
   display: inline-grid;
-  grid-gap: 1rem;
+  grid-gap: 1.2rem;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   height: 5em;
 `;

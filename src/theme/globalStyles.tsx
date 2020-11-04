@@ -1,6 +1,32 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
+
+export const FadeIn = keyframes`
+0%{
+  opacity : 0;
+}
+100%{
+  opacity:1;
+}
+`;
+
+export const FlipAround = keyframes`
+1%{
+  transform-origin: left;
+  transform: translateX(115px) translateY(115px);
+}
+`;
 
 const GlobalStyle = createGlobalStyle`
+button:hover{
+  cursor:pointer;
+}
+
+button{
+  display: grid;
+  place-items:center;
+  
+}
+
 html {
     height:100%
 }
