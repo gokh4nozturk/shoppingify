@@ -12,21 +12,25 @@ export interface ProductType {
   count: number;
 }
 
-export interface Props extends ProductType {
-  onClick: (item: ProductType) => void;
-}
-
-const Product = ({ onClick, ...item }: Props) => {
-  const { isControlToggleOverview } = useContext(Shopping);
+const Product = ({ ...item }: ProductType) => {
+  const { isControlToggleOverview, addToOverview, addToCart } = useContext(
+    Shopping
+  );
   return (
     <ContainerProduct>
-      <p className="product-name" onClick={isControlToggleOverview}>
+      <p
+        className="product-name"
+        onClick={() => {
+          isControlToggleOverview(true);
+          addToOverview(item);
+        }}
+      >
         {item.name}
       </p>
       <button
         className="btn-add-to-list"
         onClick={() => {
-          onClick(item);
+          addToCart(item);
         }}
       >
         +

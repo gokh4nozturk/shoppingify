@@ -132,11 +132,14 @@ const List = () => {
       <CartSave>
         <div className={`save-container ${isThereAnyClassContainer}`}>
           <input
+            formAction=""
+            formMethod="post"
             className="text-box-cart"
             type="text"
-            name=""
-            id=""
+            name="history-name"
+            id="historyName"
             placeholder="Enter a name"
+            required
           />
           <button className={`btn-save-cart ${isThereAnyClass}`} type="submit">
             Save

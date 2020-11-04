@@ -14,7 +14,7 @@ import { ProductType, Shopping } from "../../context";
 
 const Products = () => {
   const [filter, setFilter] = useState("");
-  const { products, categories, addToCart } = useContext(Shopping);
+  const { products, categories } = useContext(Shopping);
 
   // products from filter that is selected or not
   const filteredProducts: ProductType[] = useMemo(() => {
@@ -51,7 +51,7 @@ const Products = () => {
       </ProductsCategories>
       <ProductsView>
         {filteredProducts.map((item) => (
-          <Product key={item._id} onClick={addToCart} {...item} />
+          <Product key={item._id} {...item} />
         ))}
       </ProductsView>
     </ProductsContainer>

@@ -14,12 +14,14 @@ export type ShoppingType = {
   products: ProductType[];
   cart: ProductType[];
   categories: string[];
+  overviewItem: ProductType[];
   onToggleOverview: boolean;
   onToggleAddItem: boolean;
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType) => void;
   removeFromCart: (item: ProductType) => void;
-  isControlToggleOverview: () => void;
+  addToOverview: (item: ProductType) => void;
+  isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
 };
 
@@ -27,11 +29,13 @@ const DefaultShopping: ShoppingType = {
   products: [],
   cart: [],
   categories: [],
+  overviewItem: [],
   onToggleOverview: false,
   onToggleAddItem: false,
   addProduct: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
+  addToOverview: () => {},
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
 };
@@ -44,6 +48,7 @@ const Provider: React.FC<{}> = (props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [cart, setCart] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
+  const [overviewItem, setOverviewItem] = useState<ProductType[]>([]);
   const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
   const [onToggleAddItem, setOnToggleAddItem] = useState<boolean>(false);
 
@@ -63,15 +68,13 @@ const Provider: React.FC<{}> = (props) => {
         if (el._id === item._id) {
           el.count++;
           alreadyInCart = true;
-          console.log("ok");
         }
       });
       if (!alreadyInCart) {
         //if there is not the product, add to cart
         cartItem.push({ ...item, count: 1 });
       }
-
-      setCart([...cartItem]);
+      setCart(cartItem);
     },
     [cart]
   );
@@ -84,10 +87,24 @@ const Provider: React.FC<{}> = (props) => {
     [cart]
   );
 
-  const isControlToggleOverview: ShoppingType["isControlToggleOverview"] = () => {
-    setOnToggleOverview(!onToggleOverview);
-    setOnToggleAddItem(false);
-  };
+  const addToOverview: ShoppingType["addToOverview"] = useCallback(
+    (item) => {
+      if (overviewItem.length > 1) {
+        overviewItem.pop();
+      } else {
+        setOverviewItem([item]);
+      }
+    },
+    [overviewItem]
+  );
+
+  const isControlToggleOverview: ShoppingType["isControlToggleOverview"] = useCallback(
+    (item) => {
+      setOnToggleOverview(item);
+      setOnToggleAddItem(false);
+    },
+    []
+  );
   const isControlToggleAddItem: ShoppingType["isControlToggleAddItem"] = () => {
     setOnToggleAddItem(!onToggleAddItem);
     setOnToggleOverview(false);
@@ -125,11 +142,13 @@ const Provider: React.FC<{}> = (props) => {
         products,
         cart,
         categories,
+        overviewItem,
         onToggleOverview,
         onToggleAddItem,
         addProduct,
         addToCart,
         removeFromCart,
+        addToOverview,
         isControlToggleOverview,
         isControlToggleAddItem,
       }}
