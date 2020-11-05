@@ -11,6 +11,7 @@ export interface ProductType {
   image?: string;
   visible: boolean;
   count: number;
+  completed: boolean;
 }
 
 const Product = ({ ...item }: ProductType) => {

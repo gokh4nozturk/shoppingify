@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Shopping } from "../../context";
 
 import { CartAddItem } from "./style/styleAddItem";
@@ -22,20 +22,29 @@ import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
 
 const List = () => {
-  const { cart, removeFromCart, isControlToggleAddItem } = useContext(Shopping);
+  const {
+    cart,
+    removeFromCart,
+    isControlToggleAddItem,
+    toggleCompleted,
+  } = useContext(Shopping);
   const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
-  const [completed, setCompleted] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
+  const [completedClass, setCompletedClass] = useState("");
 
-  const completedClass = completed ? "checked" : ""; //if checkBox is checked, add to item.name this className
+  const isThereAnyClass = isThereAny ? "is-there" : "";
+  const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
+
+  const myFunc = useCallback((isCompleted: boolean) => {
+    //if checkBox is checked, add to item.name this className
+    const res = !isCompleted ? "line-through" : "none";
+    setCompletedClass(res);
+  }, []);
 
   useEffect(() => {
     cart.length > 0 ? setIsThereAny(true) : setIsThereAny(false);
   }, [cart]);
-
-  const isThereAnyClass = isThereAny ? "is-there" : "";
-  const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
 
   return (
     <CartContainer>
@@ -63,18 +72,21 @@ const List = () => {
               <FaPencilAlt />
             </button>
           </CartFullItemsTitle>
+
           {cart.map((item) => {
             return (
               <CartItemContainer>
                 {onToggleEdit && (
                   <CartItemCheckBox
                     type="checkBox"
+                    checked={item.completed}
                     onChange={() => {
-                      setCompleted(!completed);
+                      toggleCompleted(item._id);
+                      myFunc(item.completed);
                     }}
                   />
                 )}
-                <CartItemName className={`${completedClass}`}>
+                <CartItemName theme={{ main: `${completedClass}` }}>
                   {item.name}
                 </CartItemName>
                 {onToggleOperation ? (

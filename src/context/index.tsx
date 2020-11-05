@@ -9,6 +9,7 @@ export interface ProductType {
   image?: string;
   visible: boolean;
   count: number;
+  completed: boolean;
 }
 
 export type ShoppingType = {
@@ -24,6 +25,7 @@ export type ShoppingType = {
   addToOverview: (item: ProductType) => void;
   isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
+  toggleCompleted: (id: string) => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -39,6 +41,7 @@ const DefaultShopping: ShoppingType = {
   addToOverview: () => {},
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
+  toggleCompleted: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -58,6 +61,19 @@ const Provider: React.FC<{}> = (props) => {
       setProducts([...products, item]);
     },
     [products]
+  );
+
+  const toggleCompleted: ShoppingType["toggleCompleted"] = useCallback(
+    (id) => {
+      const mappedCard = cart.map((el) => {
+        if (id === el._id) {
+          return { ...el, completed: !el.completed };
+        }
+        return el;
+      });
+      setCart(mappedCard);
+    },
+    [cart]
   );
 
   const addToCart: ShoppingType["addToCart"] = useCallback(
@@ -152,6 +168,7 @@ const Provider: React.FC<{}> = (props) => {
         addToOverview,
         isControlToggleOverview,
         isControlToggleAddItem,
+        toggleCompleted,
       }}
     >
       {props.children}

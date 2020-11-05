@@ -42,15 +42,10 @@ export const CartItemContainer = styled.div`
   height: 4rem;
 
   font-size: ${({ theme }) => theme.fontSizes.large};
-
-  .checked {
-    text-decoration: line-through;
-
-    color: black;
-  }
 `;
 
 export const CartItemName = styled.p`
+  text-decoration: ${(props) => props.theme.main};
   margin: 0;
 `;
 
@@ -68,7 +63,7 @@ export const CartItemOperation = styled.div`
   align-items: center;
   justify-content: space-around;
   background: #fff;
-  width: 12rem;
+  width: 10rem;
   padding: 0.3em;
 
   border-radius: ${({ theme }) => theme.radius.secondary};
