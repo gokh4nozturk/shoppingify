@@ -95,7 +95,7 @@ export const InputElement = styled.input`
   }
 `;
 
-export const SelectCategories = styled.select`
+export const DatalistCategories = styled.datalist`
   height: 61.25px;
   width: 309.88665771484375px;
   border: 2px solid #bdbdbd;
@@ -140,11 +140,13 @@ export const BtnContainer = styled.div`
     color: #34333a;
     background: none;
     text-align: left;
+    margin-right: 0.2em;
   }
 
   .btn-save {
     color: #fff;
     background: #f9a109;
+    margin-left: 0.2em;
 
     border-radius: ${({ theme }) => theme.radius.secondary};
   }

@@ -7,7 +7,7 @@ import {
   InputContainer,
   InputElement,
   OptionCategories,
-  SelectCategories,
+  DatalistCategories,
   TitleAddItem,
 } from "./style/styleAddItem";
 
@@ -28,7 +28,6 @@ const AddItem = () => {
         <InputContainer>
           <label htmlFor="name-item">Name</label>
 
-          {/* styled.input`margin-bottom:10px;` */}
           <InputElement
             type="text"
             name="name"
@@ -60,11 +59,19 @@ const AddItem = () => {
         <InputContainer>
           <label htmlFor="image-item">Category</label>
 
-          <SelectCategories name="category" id="category-item" required>
+          <InputElement
+            type="text"
+            list="category-items"
+            placeholder="Enter a category"
+            name="category"
+            id="category-item"
+            required
+          />
+          <DatalistCategories id="category-items">
             {categories.map((item) => {
               return <OptionCategories value={item}>{item}</OptionCategories>;
             })}
-          </SelectCategories>
+          </DatalistCategories>
         </InputContainer>
         <BtnContainer>
           <button

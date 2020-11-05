@@ -61,8 +61,9 @@ const Overview = () => {
             <BtnContainer>
               <DeleteButton
                 className="delete-item-btn"
-                formMethod="post"
-                formAction={`api/product/${item._id}`}
+                onClick={() => {
+                  item.visible = false;
+                }}
               >
                 delete
               </DeleteButton>

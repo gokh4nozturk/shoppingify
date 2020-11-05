@@ -50,9 +50,9 @@ const Products = () => {
         ))}
       </ProductsCategories>
       <ProductsView>
-        {filteredProducts.map((item) => (
-          <Product key={item._id} {...item} />
-        ))}
+        {filteredProducts.map(
+          (item) => item.visible && <Product key={item._id} {...item} />
+        )}
       </ProductsView>
     </ProductsContainer>
   );

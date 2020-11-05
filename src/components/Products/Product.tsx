@@ -9,6 +9,7 @@ export interface ProductType {
   category: string;
   note: string;
   image?: string;
+  visible: boolean;
   count: number;
 }
 
@@ -23,6 +24,7 @@ const Product = ({ ...item }: ProductType) => {
         onClick={() => {
           isControlToggleOverview(true);
           addToOverview(item);
+          console.log(item.visible);
         }}
       >
         {item.name}

@@ -7,6 +7,7 @@ export interface ProductType {
   category: string;
   note: string;
   image?: string;
+  visible: boolean;
   count: number;
 }
 
