@@ -14,6 +14,7 @@ import {
   CartItemNumber,
   CartItemOperation,
   CartItemCheckBox,
+  CartCompletedBtn,
 } from "./style/styleCart";
 
 import { Source, UndrawShoppingApp } from "../icons";
@@ -33,6 +34,7 @@ const List = () => {
   const [isThereAny, setIsThereAny] = useState(false);
   const [completedClass, setCompletedClass] = useState("");
 
+  const isEditOpen = onToggleEdit ? "is-edit-open" : "";
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
 
@@ -153,9 +155,16 @@ const List = () => {
             placeholder="Enter a name"
             required
           />
-          <button className={`btn-save-cart ${isThereAnyClass}`} type="submit">
-            Save
-          </button>
+          {onToggleEdit ? (
+            <CartCompletedBtn>Complete</CartCompletedBtn>
+          ) : (
+            <button
+              className={`btn-save-cart ${isThereAnyClass} ${isEditOpen}`}
+              type="submit"
+            >
+              Save
+            </button>
+          )}
         </div>
       </CartSave>
     </CartContainer>

@@ -145,6 +145,18 @@ export const CartSave = styled.div`
   }
 `;
 
+export const CartCompletedBtn = styled.button`
+  background: #56ccf2;
+  height: 35px;
+  border: 0;
+  width: 90px;
+  height: 60px;
+  color: #fff;
+  box-sizing: border-box;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
 export const CartNoItems = styled.div`
   grid-row: 2/3;
   display: inline-grid;
