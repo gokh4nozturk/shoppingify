@@ -49,12 +49,35 @@ export const CartAddItem = styled.div`
 
 export const AddItemContainer = styled.div`
   display: inline-grid;
-  grid-template-rows: 60px 1fr;
+  grid-template-rows: 3rem 3rem 1fr;
   height: 100%;
+  width: 100%;
+`;
+
+export const BtnBack = styled.div`
+  grid-row: 1/2;
+  display: inline-flex;
+  align-items: flex-end;
+`;
+
+export const BackButton = styled.button`
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  width: 5em;
+
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const TitleAddItem = styled.div`
-  grid-row: 1/2;
+  grid-row: 2/3;
+  display: inline-flex;
+  align-items: flex-start;
+  width: 9em;
+  height: 100%;
+
   margin: 35px;
   text-align: left;
   font-weight: 500;
@@ -62,7 +85,7 @@ export const TitleAddItem = styled.div`
 `;
 
 export const FormContainer = styled.form`
-  grid-row: 2/3;
+  grid-row: 3/4;
   margin-top: 50px;
   display: inline-flex;
   flex-direction: column;

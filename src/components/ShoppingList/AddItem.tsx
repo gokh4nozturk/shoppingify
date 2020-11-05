@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { BsArrowLeft } from "react-icons/bs";
 import { Shopping } from "../../context";
 import {
   AddItemContainer,
@@ -9,6 +10,8 @@ import {
   OptionCategories,
   DatalistCategories,
   TitleAddItem,
+  BtnBack,
+  BackButton,
 } from "./style/styleAddItem";
 
 const AddItem = () => {
@@ -16,6 +19,17 @@ const AddItem = () => {
 
   return (
     <AddItemContainer>
+      <BtnBack>
+        <BackButton
+          onClick={() => {
+            isControlToggleAddItem();
+          }}
+        >
+          <BsArrowLeft />
+          back
+        </BackButton>
+      </BtnBack>
+
       <TitleAddItem className="add-item-title">
         <p>Add a new item</p>
       </TitleAddItem>
@@ -74,10 +88,7 @@ const AddItem = () => {
           </DatalistCategories>
         </InputContainer>
         <BtnContainer>
-          <button
-            className="btn-cancel buttons"
-            onClick={isControlToggleAddItem}
-          >
+          <button className="btn-cancel buttons" onClick={() => {}}>
             Cancel
           </button>
           <button className="btn-save buttons" type="submit">
