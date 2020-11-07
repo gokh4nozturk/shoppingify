@@ -22,7 +22,7 @@ export const ResultsMonth = styled.p`
 
 export const ShoppingContainer = styled.div`
   display: inline-grid;
-  grid-template-columns: 1fr 30%;
+  grid-template-columns: 1fr minmax(150px, 30%);
   padding: 0.5em 1.5em;
   width: 100%;
   background: #ffffff;
