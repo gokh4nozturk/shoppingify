@@ -15,6 +15,8 @@ import {
   CartItemOperation,
   CartItemCheckBox,
   CartCompletedBtn,
+  CartCompleteCancelBtn,
+  CartCompleteContainer,
 } from "./style/styleCart";
 
 import { Source, UndrawShoppingApp } from "../icons";
@@ -34,7 +36,6 @@ const List = () => {
   const [isThereAny, setIsThereAny] = useState(false);
   const [completedClass, setCompletedClass] = useState("");
 
-  const isEditOpen = onToggleEdit ? "is-edit-open" : "";
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
 
@@ -143,30 +144,34 @@ const List = () => {
         </CartNoItems>
       )}
 
-      <CartSave>
-        <div className={`save-container ${isThereAnyClassContainer}`}>
-          <input
-            formAction=""
-            formMethod="post"
-            className="text-box-cart"
-            type="text"
-            name="history-name"
-            id="historyName"
-            placeholder="Enter a name"
-            required
-          />
-          {onToggleEdit ? (
-            <CartCompletedBtn>Complete</CartCompletedBtn>
-          ) : (
+      {onToggleEdit ? (
+        <CartCompleteContainer>
+          <CartCompleteCancelBtn>Cancel</CartCompleteCancelBtn>
+          <CartCompletedBtn>Complete</CartCompletedBtn>
+        </CartCompleteContainer>
+      ) : (
+        <CartSave>
+          <div className={`save-container ${isThereAnyClassContainer}`}>
+            <input
+              formAction=""
+              formMethod="post"
+              className="text-box-cart"
+              type="text"
+              name="history-name"
+              id="historyName"
+              placeholder="Enter a name"
+              required
+            />
+
             <button
-              className={`btn-save-cart ${isThereAnyClass} ${isEditOpen}`}
+              className={`btn-save-cart ${isThereAnyClass}`}
               type="submit"
             >
               Save
             </button>
-          )}
-        </div>
-      </CartSave>
+          </div>
+        </CartSave>
+      )}
     </CartContainer>
   );
 };

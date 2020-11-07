@@ -145,14 +145,38 @@ export const CartSave = styled.div`
   }
 `;
 
+export const CartCompleteContainer = styled.div`
+  grid-row: 3/4;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 130px;
+  background: #fff;
+`;
+
+export const CartCompleteCancelBtn = styled.button`
+  display: inline-grid;
+  place-items: center;
+  background: none;
+  border: none;
+  width: 7rem;
+  color: #000;
+  font-weight: bold;
+  height: 4rem;
+  margin-right: 0.5em;
+`;
+
 export const CartCompletedBtn = styled.button`
   background: #56ccf2;
-  height: 35px;
-  border: 0;
-  width: 90px;
-  height: 60px;
+  display: inline-grid;
+  place-items: center;
+  border: none;
+  width: 7rem;
+  height: 4rem;
   color: #fff;
-  box-sizing: border-box;
+  font-weight: bold;
+  margin-left: 0.5em;
 
   border-radius: ${({ theme }) => theme.radius.secondary};
 `;
