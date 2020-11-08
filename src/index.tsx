@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "styled-components";
-import App from "./App";
+import Home from "./pages/Home";
 
 import GlobalStyles from "./theme/globalStyles";
 import Theme from "./theme/theme";
@@ -11,7 +11,7 @@ import reportWebVitals from "./reportWebVitals";
 ReactDOM.render(
   <ThemeProvider theme={Theme}>
     <GlobalStyles />
-    <App />
+    <Home />
   </ThemeProvider>,
   document.getElementById("root")
 );

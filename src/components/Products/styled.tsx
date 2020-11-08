@@ -57,8 +57,8 @@ export const ProductsView = styled.div`
 `;
 
 export const ContainerProduct = styled.div`
-  display: inline-flex;
-  justify-content: space-around;
+  display: inline-grid;
+  grid-template-columns: minmax(120px, 30%) 1fr;
   align-items: center;
   width: 100%;
   height: 4rem;
@@ -67,6 +67,7 @@ export const ContainerProduct = styled.div`
   border-radius: 12px;
 
   .btn-add-to-list {
+    grid-column: 2/3;
     height: 1.5em;
     width: 1.5em;
     font-size: 1.4em;
@@ -76,7 +77,8 @@ export const ContainerProduct = styled.div`
   }
 
   .product-name {
-    padding: 0;
+    grid-column: 1/2;
+    padding: 0.2em 0.3em;
     margin: 0;
   }
 

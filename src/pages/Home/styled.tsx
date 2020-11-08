@@ -19,11 +19,11 @@ export const HomeContainer = styled.section`
     grid-column: 1/2;
     display: flex;
     align-items: flex-start;
-    padding: 10px 0px;
+    padding: 0.9em 0;
   }
   .part-products {
     grid-column: 2/3;
-    padding: 0 60px;
+    padding: 0 5em;
   }
   .part-shopping-list {
     grid-column: 3/4;

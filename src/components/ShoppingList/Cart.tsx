@@ -29,7 +29,7 @@ const List = () => {
     cart,
     removeFromCart,
     isControlToggleAddItem,
-    toggleCompleted,
+    toggleCartCompleted,
   } = useContext(Shopping);
   const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
@@ -84,7 +84,7 @@ const List = () => {
                     type="checkBox"
                     checked={item.completed}
                     onChange={() => {
-                      toggleCompleted(item._id);
+                      toggleCartCompleted(item._id);
                       myFunc(item.completed);
                     }}
                   />

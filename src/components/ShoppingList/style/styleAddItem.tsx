@@ -54,23 +54,6 @@ export const AddItemContainer = styled.div`
   width: 100%;
 `;
 
-export const BtnBack = styled.div`
-  grid-row: 1/2;
-  display: inline-flex;
-  align-items: flex-end;
-`;
-
-export const BackButton = styled.button`
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
-  background: none;
-  border: none;
-  width: 5em;
-
-  color: ${({ theme }) => theme.colors.primary};
-`;
-
 export const TitleAddItem = styled.div`
   grid-row: 2/3;
   display: inline-flex;

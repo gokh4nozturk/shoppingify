@@ -10,9 +10,8 @@ import {
   OptionCategories,
   DatalistCategories,
   TitleAddItem,
-  BtnBack,
-  BackButton,
 } from "./style/styleAddItem";
+import { BackButton, BtnBack } from "./style/styleOverview";
 
 const AddItem = () => {
   const { categories, isControlToggleAddItem } = useContext(Shopping);
