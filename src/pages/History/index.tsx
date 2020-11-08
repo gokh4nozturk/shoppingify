@@ -24,9 +24,6 @@ type ResponseType = undefined | HistoryType[];
 
 const History = () => {
   const [history, setHistories] = useState<HistoryType[]>([]);
-  const [isCompleted, setIsCompleted] = useState(true);
-
-  const variable = isCompleted ? border.completed : border.cancelled;
 
   const historyDate = new Date();
   const months = [
@@ -82,11 +79,19 @@ const History = () => {
                         historyDate.getFullYear()}
                     </ShoppingDateDetail>
                   </ShoppingDateContainer>
-                  <ShoppingState color={variable}>
-                    {isCompleted ? `completed` : `cancelled`}
+                  <ShoppingState
+                    color={item.completed ? border.completed : border.cancelled}
+                  >
+                    {item.completed ? `completed` : `cancelled`}
                   </ShoppingState>
                   <Link to={`history/${item._id}`}>
-                    <FaChevronRight size="1.5rem" />
+                    <FaChevronRight
+                      size="1.5rem"
+                      style={{
+                        textDecoration: "none",
+                        color: "#F9A109",
+                      }}
+                    />
                   </Link>
                 </DetailPartSecond>
               </ShoppingContainer>

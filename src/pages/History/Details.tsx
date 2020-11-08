@@ -26,6 +26,8 @@ export interface HistoryType {
   _id: string;
   name: string;
   listItem: ProductType[];
+  completed: boolean;
+  createdAt: Date;
 }
 
 const Details = ({ match }: any) => {
