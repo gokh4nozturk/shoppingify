@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import Details from "./Details";
+import { HistoryType } from "./Details";
 
 import {
   Container,
@@ -13,21 +13,20 @@ import {
   ShoppingDateContainer,
   ShoppingDateDetail,
   ShoppingState,
-  ShoppingDetailBtn,
   border,
 } from "./style/styledIndex";
 import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
+import Axios from "axios";
+import { Link } from "react-router-dom";
+
+type ResponseType = undefined | HistoryType[];
 
 const History = () => {
-  const [onToggleDetail, setOnToggleDetail] = useState(false);
+  const [history, setHistories] = useState<HistoryType[]>([]);
   const [isCompleted, setIsCompleted] = useState(true);
 
   const variable = isCompleted ? border.completed : border.cancelled;
-
-  const isControlDetail = () => {
-    setOnToggleDetail(!onToggleDetail);
-  };
 
   const historyDate = new Date();
   const months = [
@@ -45,123 +44,56 @@ const History = () => {
     "December",
   ];
 
+  const getHistory = async () => {
+    const newHistories: ResponseType = await Axios.get("/api/histories")
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+
+    setHistories(newHistories);
+  };
+
+  useEffect(() => {
+    getHistory();
+  }, []);
+
   return (
     <>
-      {!onToggleDetail ? (
-        <Container>
-          <Title>Shopping history</Title>
-          <ResultsContainer>
-            <ResultsMonth>
-              {months[historyDate.getMonth()] + " " + historyDate.getFullYear()}
-            </ResultsMonth>
-            <ShoppingContainer>
-              <ShoppingName>{`Grocery List`}</ShoppingName>
+      <Container>
+        <Title>Shopping history</Title>
+        {history.map((item) => {
+          return (
+            <ResultsContainer>
+              <ResultsMonth>
+                {months[historyDate.getMonth()] +
+                  " " +
+                  historyDate.getFullYear()}
+              </ResultsMonth>
+              <ShoppingContainer>
+                <ShoppingName>{item.name}</ShoppingName>
 
-              <DetailPartSecond>
-                <ShoppingDateContainer>
-                  <BsCalendar size="1.5rem" />
-                  <ShoppingDateDetail>
-                    {historyDate.getMonth() +
-                      "." +
-                      historyDate.getDay() +
-                      "." +
-                      historyDate.getFullYear()}
-                  </ShoppingDateDetail>
-                </ShoppingDateContainer>
-                <ShoppingState color={variable}>
-                  {isCompleted ? `completed` : `cancelled`}
-                </ShoppingState>
-                <ShoppingDetailBtn onClick={isControlDetail}>
-                  <FaChevronRight size="1.5rem" />
-                </ShoppingDetailBtn>
-              </DetailPartSecond>
-            </ShoppingContainer>
-          </ResultsContainer>
-          <ResultsContainer>
-            <ResultsMonth>
-              {months[historyDate.getMonth()] + " " + historyDate.getFullYear()}
-            </ResultsMonth>
-            <ShoppingContainer>
-              <ShoppingName>{`Grocery List`}</ShoppingName>
-
-              <DetailPartSecond>
-                <ShoppingDateContainer>
-                  <BsCalendar size="1.5rem" />
-                  <ShoppingDateDetail>
-                    {historyDate.getMonth() +
-                      "." +
-                      historyDate.getDay() +
-                      "." +
-                      historyDate.getFullYear()}
-                  </ShoppingDateDetail>
-                </ShoppingDateContainer>
-                <ShoppingState color={variable}>
-                  {isCompleted ? `completed` : `cancelled`}
-                </ShoppingState>
-                <ShoppingDetailBtn onClick={isControlDetail}>
-                  <FaChevronRight size="1.5rem" />
-                </ShoppingDetailBtn>
-              </DetailPartSecond>
-            </ShoppingContainer>
-          </ResultsContainer>
-          <ResultsContainer>
-            <ResultsMonth>
-              {months[historyDate.getMonth()] + " " + historyDate.getFullYear()}
-            </ResultsMonth>
-            <ShoppingContainer>
-              <ShoppingName>{`Grocery List`}</ShoppingName>
-
-              <DetailPartSecond>
-                <ShoppingDateContainer>
-                  <BsCalendar size="1.5rem" />
-                  <ShoppingDateDetail>
-                    {historyDate.getMonth() +
-                      "." +
-                      historyDate.getDay() +
-                      "." +
-                      historyDate.getFullYear()}
-                  </ShoppingDateDetail>
-                </ShoppingDateContainer>
-                <ShoppingState color={variable}>
-                  {isCompleted ? `completed` : `cancelled`}
-                </ShoppingState>
-                <ShoppingDetailBtn onClick={isControlDetail}>
-                  <FaChevronRight size="1.5rem" />
-                </ShoppingDetailBtn>
-              </DetailPartSecond>
-            </ShoppingContainer>
-          </ResultsContainer>
-          <ResultsContainer>
-            <ResultsMonth>
-              {months[historyDate.getMonth()] + " " + historyDate.getFullYear()}
-            </ResultsMonth>
-            <ShoppingContainer>
-              <ShoppingName>{`Grocery List`}</ShoppingName>
-
-              <DetailPartSecond>
-                <ShoppingDateContainer>
-                  <BsCalendar size="1.5rem" />
-                  <ShoppingDateDetail>
-                    {historyDate.getMonth() +
-                      "." +
-                      historyDate.getDay() +
-                      "." +
-                      historyDate.getFullYear()}
-                  </ShoppingDateDetail>
-                </ShoppingDateContainer>
-                <ShoppingState color={variable}>
-                  {isCompleted ? `completed` : `cancelled`}
-                </ShoppingState>
-                <ShoppingDetailBtn onClick={isControlDetail}>
-                  <FaChevronRight size="1.5rem" />
-                </ShoppingDetailBtn>
-              </DetailPartSecond>
-            </ShoppingContainer>
-          </ResultsContainer>
-        </Container>
-      ) : (
-        <Details isControlDetail={isControlDetail}></Details>
-      )}
+                <DetailPartSecond>
+                  <ShoppingDateContainer>
+                    <BsCalendar size="1.5rem" />
+                    <ShoppingDateDetail>
+                      {historyDate.getMonth() +
+                        "." +
+                        historyDate.getDate() +
+                        "." +
+                        historyDate.getFullYear()}
+                    </ShoppingDateDetail>
+                  </ShoppingDateContainer>
+                  <ShoppingState color={variable}>
+                    {isCompleted ? `completed` : `cancelled`}
+                  </ShoppingState>
+                  <Link to={`history/${item._id}`}>
+                    <FaChevronRight size="1.5rem" />
+                  </Link>
+                </DetailPartSecond>
+              </ShoppingContainer>
+            </ResultsContainer>
+          );
+        })}
+      </Container>
     </>
   );
 };

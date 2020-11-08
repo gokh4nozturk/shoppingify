@@ -9,6 +9,7 @@ import Statistics from "../Statistics";
 import History from "../History";
 
 import { HomeContainer } from "./styled";
+import Details from "../History/Details";
 
 const Home = () => {
   return (
@@ -21,8 +22,9 @@ const Home = () => {
           <Switch>
             <div className="part-products home-item">
               <Route path="/" exact component={Products} />
-              <Route path="/history" component={History} />
+              <Route path="/history" exact component={History} />
               <Route path="/statistics" component={Statistics} />
+              <Route path="/history/:id" component={Details} />
             </div>
           </Switch>
           <div className="part-shopping-list home-item">
