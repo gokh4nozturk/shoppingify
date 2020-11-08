@@ -61,9 +61,9 @@ const History = () => {
           return (
             <ResultsContainer>
               <ResultsMonth>
-                {months[historyDate.getMonth()] +
-                  " " +
-                  historyDate.getFullYear()}
+                {`${
+                  months[historyDate.getMonth()]
+                } ${historyDate.getFullYear()}`}
               </ResultsMonth>
               <ShoppingContainer>
                 <ShoppingName>{item.name}</ShoppingName>
