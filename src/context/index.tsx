@@ -19,6 +19,7 @@ export type ShoppingType = {
   overviewItem: ProductType[];
   onToggleOverview: boolean;
   onToggleAddItem: boolean;
+  onTogglePopUp: boolean;
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType) => void;
   removeFromCart: (item: ProductType) => void;
@@ -26,6 +27,7 @@ export type ShoppingType = {
   isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
   toggleCartCompleted: (id: string) => void;
+  isControlPopUpToggle: () => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -35,6 +37,7 @@ const DefaultShopping: ShoppingType = {
   overviewItem: [],
   onToggleOverview: false,
   onToggleAddItem: false,
+  onTogglePopUp: false,
   addProduct: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
@@ -42,6 +45,7 @@ const DefaultShopping: ShoppingType = {
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
   toggleCartCompleted: () => {},
+  isControlPopUpToggle: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -55,6 +59,7 @@ const Provider: React.FC<{}> = (props) => {
   const [overviewItem, setOverviewItem] = useState<ProductType[]>([]);
   const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
   const [onToggleAddItem, setOnToggleAddItem] = useState<boolean>(false);
+  const [onTogglePopUp, setOnTogglePopUp] = useState<boolean>(false);
 
   const addProduct: ShoppingType["addProduct"] = useCallback(
     (item) => {
@@ -127,6 +132,10 @@ const Provider: React.FC<{}> = (props) => {
     setOnToggleOverview(false);
   };
 
+  const isControlPopUpToggle: ShoppingType["isControlPopUpToggle"] = () => {
+    setOnTogglePopUp(!onTogglePopUp);
+  };
+
   const fetchData = async () => {
     const newProducts: ResponseType = await Axios.get(`/api/products`)
       .then((res) => res.data)
@@ -162,6 +171,7 @@ const Provider: React.FC<{}> = (props) => {
         overviewItem,
         onToggleOverview,
         onToggleAddItem,
+        onTogglePopUp,
         addProduct,
         addToCart,
         removeFromCart,
@@ -169,6 +179,7 @@ const Provider: React.FC<{}> = (props) => {
         isControlToggleOverview,
         isControlToggleAddItem,
         toggleCartCompleted,
+        isControlPopUpToggle,
       }}
     >
       {props.children}

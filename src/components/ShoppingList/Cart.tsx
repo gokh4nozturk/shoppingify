@@ -28,15 +28,18 @@ import Axios from "axios";
 const List = () => {
   const {
     cart,
+
     removeFromCart,
     isControlToggleAddItem,
     toggleCartCompleted,
+    isControlPopUpToggle,
   } = useContext(Shopping);
   const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
   const [completedClass, setCompletedClass] = useState("");
   const [nameVal, setNameVal] = useState("");
+  const [completeValue, setCompleteValue] = useState<boolean>(false);
 
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
@@ -62,6 +65,18 @@ const List = () => {
     },
     [nameVal]
   );
+
+  const UpdateTheHistory = useCallback((cart) => {
+    Axios.put("/api/history", {
+      completed: true,
+    })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
 
   useEffect(() => {
     cart.length > 0 ? setIsThereAny(true) : setIsThereAny(false);
@@ -164,8 +179,16 @@ const List = () => {
 
       {onToggleEdit ? (
         <CartCompleteContainer>
-          <CartCompleteCancelBtn>Cancel</CartCompleteCancelBtn>
-          <CartCompletedBtn>Complete</CartCompletedBtn>
+          <CartCompleteCancelBtn onClick={isControlPopUpToggle}>
+            Cancel
+          </CartCompleteCancelBtn>
+          <CartCompletedBtn
+            onClick={() => {
+              setCompleteValue(true);
+            }}
+          >
+            Complete
+          </CartCompletedBtn>
         </CartCompleteContainer>
       ) : (
         <CartSave>

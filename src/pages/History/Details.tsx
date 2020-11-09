@@ -34,9 +34,9 @@ export interface HistoryType {
 const Details = ({ match }: any) => {
   const [filter, setFilter] = useState("");
   const { goBack } = useHistory();
-  const [list, setList] = useState<HistoryType[]>([]);
-  const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]);
-  const [listCategories, setListCategories] = useState<string[]>([]);
+  const [list, setList] = useState<HistoryType[]>([]); //see the list
+  const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]); //see the products in the list
+  const [listCategories, setListCategories] = useState<string[]>([]); //see the products' categories
   const d = new Date();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];

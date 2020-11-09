@@ -9,12 +9,19 @@ import {
   ProductsCategory,
   ProductsTitle,
   SearchBox,
+  Transparent,
 } from "./styled";
 import { ProductType, Shopping } from "../../context";
+import CancelPopUp from "../Modal";
 
 const Products = () => {
   const [filter, setFilter] = useState("");
-  const { products, categories } = useContext(Shopping);
+  const {
+    products,
+    categories,
+    onTogglePopUp,
+    isControlPopUpToggle,
+  } = useContext(Shopping);
 
   // products from filter that is selected or not
   const filteredProducts: ProductType[] = useMemo(() => {
@@ -28,6 +35,8 @@ const Products = () => {
 
   return (
     <ProductsContainer>
+      {onTogglePopUp ? <Transparent onClick={isControlPopUpToggle} /> : null}
+      {onTogglePopUp ? <CancelPopUp /> : null}
       <ProductsTop>
         <ProductsTitle className="title">
           <p className="shoppingify">Shoppingify </p>

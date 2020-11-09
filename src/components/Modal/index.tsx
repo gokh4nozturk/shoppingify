@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Shopping } from "../../context";
 
 import {
   Container,
@@ -10,14 +11,15 @@ import {
 } from "./style";
 
 const CancelPopUp = () => {
+  const { isControlPopUpToggle } = useContext(Shopping);
   return (
     <Container>
       <BtnContainer>
-        <CloseBtn>X</CloseBtn>
+        <CloseBtn onClick={isControlPopUpToggle}>X</CloseBtn>
       </BtnContainer>
       <Title>Are you sure that you want to cancel this list?</Title>
       <BtnContainer>
-        <CancelBtn>Cancel</CancelBtn>
+        <CancelBtn onClick={isControlPopUpToggle}>Cancel</CancelBtn>
         <YesBtn>Yes</YesBtn>
       </BtnContainer>
     </Container>

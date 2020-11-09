@@ -1,11 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  z-index: 20;
   position: absolute;
-  width: 508.52px;
-  height: 219.39px;
-  left: 442.8px;
-  top: 265.38px;
+  width: 32rem;
+  height: 13.75em;
+  left: 560px;
+  top: 380px;
 
   padding: 0 2em;
 

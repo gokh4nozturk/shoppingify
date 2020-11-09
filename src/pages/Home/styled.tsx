@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HomeContainer = styled.section`
+  z-index: 0;
   display: grid;
   grid-template-columns: 70px 1fr 390px;
   place-items: center;
