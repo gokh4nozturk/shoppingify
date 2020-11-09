@@ -59,7 +59,7 @@ const History = () => {
         <Title>Shopping history</Title>
         {history.map((item) => {
           return (
-            <ResultsContainer>
+            <ResultsContainer key={item._id}>
               <ResultsMonth>
                 {`${
                   months[historyDate.getMonth()]

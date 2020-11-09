@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -9,16 +9,16 @@ import {
   Container,
   PName,
   PPieces,
+  ContainerProduct,
+  ProductsView,
+  ProductsCategories,
+  ProductsCategory,
 } from "./style/styledDetails";
 import {
   BackButton,
   BtnBack,
 } from "../../components/ShoppingList/style/styleOverview";
 import { ShoppingDateContainer, ShoppingDateDetail } from "./style/styledIndex";
-import {
-  ContainerProduct,
-  ProductsView,
-} from "../../components/Products/styled";
 
 import { ProductType } from "../../components/Products/Product";
 
@@ -28,12 +28,15 @@ export interface HistoryType {
   listItem: ProductType[];
   completed: boolean;
   createdAt: Date;
+  pieces: number;
 }
 
 const Details = ({ match }: any) => {
+  const [filter, setFilter] = useState("");
   const { goBack } = useHistory();
   const [list, setList] = useState<HistoryType[]>([]);
   const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]);
+  const [listCategories, setListCategories] = useState<string[]>([]);
   const d = new Date();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -47,13 +50,35 @@ const Details = ({ match }: any) => {
     setHistoryProduct(newList.listItem);
   }, [match]);
 
+  const fetchCategories = useCallback(() => {
+    const category = historyProduct.reduce<string[]>((acc, cur) => {
+      const { category } = cur;
+      const isInState = acc.includes(category);
+      if (isInState) {
+        return acc;
+      }
+      return [...acc, category];
+    }, []);
+    setListCategories(category);
+  }, [historyProduct]);
+
   useEffect(() => {
     fetchList();
-  }, [fetchList]);
+    fetchCategories();
+  }, [fetchList, fetchCategories]);
+
+  const filteredProducts: ProductType[] = useMemo(() => {
+    // Check if there is a filter
+    if (!filter) {
+      return historyProduct;
+    }
+    // if no filter
+    return historyProduct.filter((product) => product.category === filter);
+  }, [filter, historyProduct]);
 
   return (
     <Container>
-      <BtnBack>
+      <BtnBack className="btn-back">
         <BackButton onClick={goBack}>
           <BsArrowLeft />
           back
@@ -62,7 +87,7 @@ const Details = ({ match }: any) => {
 
       {list.map((item) => {
         return (
-          <Title>
+          <Title key={item._id}>
             <SubTitle>{item.name}</SubTitle>
             <ShoppingDateContainer>
               <BsCalendar size="1.5rem" />
@@ -81,16 +106,28 @@ const Details = ({ match }: any) => {
         );
       })}
 
-      {historyProduct.map((item) => {
-        return (
-          <ProductsView>
-            <ContainerProduct>
+      <ProductsCategories>
+        {listCategories.map((item) => (
+          <ProductsCategory
+            onClick={() => {
+              setFilter(filter === item ? "" : item);
+            }}
+          >
+            {item}
+          </ProductsCategory>
+        ))}
+      </ProductsCategories>
+
+      <ProductsView>
+        {filteredProducts.map((item) => {
+          return (
+            <ContainerProduct key={item._id}>
               <PName>{item.name}</PName>
-              <PPieces>3 pcs</PPieces>
+              <PPieces>{item.count + " pcs"}</PPieces>
             </ContainerProduct>
-          </ProductsView>
-        );
-      })}
+          );
+        })}
+      </ProductsView>
     </Container>
   );
 };

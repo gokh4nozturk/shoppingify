@@ -23,6 +23,7 @@ import { Source, UndrawShoppingApp } from "../icons";
 import { FaPencilAlt } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
+import Axios from "axios";
 
 const List = () => {
   const {
@@ -35,6 +36,7 @@ const List = () => {
   const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
   const [completedClass, setCompletedClass] = useState("");
+  const [nameVal, setNameVal] = useState("");
 
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
@@ -44,6 +46,22 @@ const List = () => {
     const res = !isCompleted ? "line-through" : "none";
     setCompletedClass(res);
   }, []);
+
+  const addToHistory = useCallback(
+    (cart) => {
+      Axios.post("/api/history", {
+        name: nameVal,
+        listItem: cart,
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    [nameVal]
+  );
 
   useEffect(() => {
     cart.length > 0 ? setIsThereAny(true) : setIsThereAny(false);
@@ -153,8 +171,10 @@ const List = () => {
         <CartSave>
           <div className={`save-container ${isThereAnyClassContainer}`}>
             <input
-              formAction=""
-              formMethod="post"
+              value={nameVal}
+              onChange={(e) => {
+                setNameVal(e.currentTarget.value);
+              }}
               className="text-box-cart"
               type="text"
               name="history-name"
@@ -166,6 +186,9 @@ const List = () => {
             <button
               className={`btn-save-cart ${isThereAnyClass}`}
               type="submit"
+              onClick={() => {
+                addToHistory(cart);
+              }}
             >
               Save
             </button>
