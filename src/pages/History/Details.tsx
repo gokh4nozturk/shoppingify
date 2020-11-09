@@ -44,7 +44,7 @@ const Details = ({ match }: any) => {
       .catch((err) => console.log(err));
 
     setList([newList]);
-    setHistoryProduct([newList.listItem]);
+    setHistoryProduct(newList.listItem);
   }, [match]);
 
   useEffect(() => {
