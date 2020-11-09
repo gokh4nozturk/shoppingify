@@ -1,24 +1,21 @@
 import React from "react";
-import { STContainer } from "./styled";
+import {
+  StatisticsContainer,
+  TopContainer,
+  TopItemsContainer,
+  TopCategoriesContainer,
+  MonthlyContainer,
+} from "./styled";
 
 const Statistics = () => {
   return (
-    <STContainer>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-      <div>Statistics</div>
-    </STContainer>
+    <StatisticsContainer>
+      <TopContainer>
+        <TopItemsContainer>Items</TopItemsContainer>
+        <TopCategoriesContainer>Categories</TopCategoriesContainer>
+      </TopContainer>
+      <MonthlyContainer>Monthly</MonthlyContainer>
+    </StatisticsContainer>
   );
 };
 
