@@ -1,7 +1,13 @@
 import React, { useContext } from "react";
 import { Shopping } from "../../context";
 
-import { ContainerProduct } from "./styled";
+import {
+  ContainerProduct,
+  AddToListBtn,
+  AddToListBtnContainer,
+  ProductName,
+  ProductNameContainer,
+} from "./styled";
 
 export interface ProductType {
   _id: string;
@@ -20,24 +26,25 @@ const Product = ({ ...item }: ProductType) => {
   );
   return (
     <ContainerProduct>
-      <p
-        className="product-name"
-        onClick={() => {
-          isControlToggleOverview(true);
-          addToOverview(item);
-          console.log(item.visible);
-        }}
-      >
-        {item.name}
-      </p>
-      <button
-        className="btn-add-to-list"
-        onClick={() => {
-          addToCart(item);
-        }}
-      >
-        +
-      </button>
+      <ProductNameContainer>
+        <ProductName
+          onClick={() => {
+            isControlToggleOverview(true);
+            addToOverview(item);
+          }}
+        >
+          {item.name}
+        </ProductName>
+      </ProductNameContainer>
+      <AddToListBtnContainer>
+        <AddToListBtn
+          onClick={() => {
+            addToCart(item);
+          }}
+        >
+          +
+        </AddToListBtn>
+      </AddToListBtnContainer>
     </ContainerProduct>
   );
 };

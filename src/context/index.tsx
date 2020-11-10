@@ -26,7 +26,6 @@ export type ShoppingType = {
   addToOverview: (item: ProductType) => void;
   isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
-  toggleCartCompleted: (id: string) => void;
   isControlPopUpToggle: () => void;
 };
 
@@ -44,7 +43,6 @@ const DefaultShopping: ShoppingType = {
   addToOverview: () => {},
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
-  toggleCartCompleted: () => {},
   isControlPopUpToggle: () => {},
 };
 
@@ -66,19 +64,6 @@ const Provider: React.FC<{}> = (props) => {
       setProducts([...products, item]);
     },
     [products]
-  );
-
-  const toggleCartCompleted: ShoppingType["toggleCartCompleted"] = useCallback(
-    (id) => {
-      const mappedCard = cart.map((el) => {
-        if (id === el._id) {
-          return { ...el, completed: !el.completed };
-        }
-        return el;
-      });
-      setCart(mappedCard);
-    },
-    [cart]
   );
 
   const addToCart: ShoppingType["addToCart"] = useCallback(
@@ -160,7 +145,7 @@ const Provider: React.FC<{}> = (props) => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [products]);
 
   return (
     <Shopping.Provider
@@ -178,7 +163,6 @@ const Provider: React.FC<{}> = (props) => {
         addToOverview,
         isControlToggleOverview,
         isControlToggleAddItem,
-        toggleCartCompleted,
         isControlPopUpToggle,
       }}
     >

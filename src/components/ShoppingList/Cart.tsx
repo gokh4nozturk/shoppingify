@@ -13,11 +13,9 @@ import {
   CartItemName,
   CartItemNumber,
   CartItemOperation,
-  CartItemCheckBox,
 } from "./style/styleCart";
 
 import { Source, UndrawShoppingApp } from "../icons";
-import { FaPencilAlt } from "react-icons/fa";
 import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
 import Axios from "axios";
@@ -28,22 +26,12 @@ const List = () => {
 
     removeFromCart,
     isControlToggleAddItem,
-    toggleCartCompleted,
   } = useContext(Shopping);
-  const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
-  const [completedClass, setCompletedClass] = useState("");
   const [nameVal, setNameVal] = useState("");
-
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
-
-  const myFunc = useCallback((isCompleted: boolean) => {
-    //if checkBox is checked, add to item.name this className
-    const res = !isCompleted ? "line-through" : "none";
-    setCompletedClass(res);
-  }, []);
 
   const addToHistory = useCallback(
     (cart) => {
@@ -60,18 +48,6 @@ const List = () => {
     },
     [nameVal]
   );
-
-  const UpdateTheHistory = useCallback((cart) => {
-    Axios.put("/api/history", {
-      completed: true,
-    })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }, []);
 
   useEffect(() => {
     cart.length > 0 ? setIsThereAny(true) : setIsThereAny(false);
@@ -94,32 +70,13 @@ const List = () => {
         <CartFullItems>
           <CartFullItemsTitle>
             <Title>Shopping List</Title>
-            <button
-              className="on-toggle-edit-btn"
-              onClick={() => {
-                setOnToggleEdit(!onToggleEdit);
-              }}
-            >
-              <FaPencilAlt />
-            </button>
           </CartFullItemsTitle>
 
           {cart.map((item) => {
             return (
               <CartItemContainer>
-                {onToggleEdit && (
-                  <CartItemCheckBox
-                    type="checkBox"
-                    checked={item.completed}
-                    onChange={() => {
-                      toggleCartCompleted(item._id);
-                      myFunc(item.completed);
-                    }}
-                  />
-                )}
-                <CartItemName theme={{ main: `${completedClass}` }}>
-                  {item.name}
-                </CartItemName>
+                <CartItemName>{item.name}</CartItemName>
+
                 {onToggleOperation ? (
                   <CartItemOperation
                     onMouseLeave={() => {
@@ -192,6 +149,7 @@ const List = () => {
             type="submit"
             onClick={() => {
               addToHistory(cart);
+              setNameVal("");
             }}
           >
             Save

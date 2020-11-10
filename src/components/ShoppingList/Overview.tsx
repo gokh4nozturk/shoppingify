@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useCallback, useContext } from "react";
 import {
   OverviewContainer,
   BtnBack,
@@ -18,11 +18,20 @@ import {
 } from "./style/styleOverview";
 import { BsArrowLeft } from "react-icons/bs";
 import { Shopping } from "../../context";
+import Axios from "axios";
 
 const Overview = () => {
   const { isControlToggleOverview, addToCart, overviewItem } = useContext(
     Shopping
   );
+
+  const DeleteItem = useCallback(async (id) => {
+    await Axios.delete(`api/product/${id}`)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <OverviewContainer>
@@ -62,7 +71,8 @@ const Overview = () => {
               <DeleteButton
                 className="delete-item-btn"
                 onClick={() => {
-                  item.visible = false;
+                  DeleteItem(item._id);
+                  isControlToggleOverview(false);
                 }}
               >
                 delete

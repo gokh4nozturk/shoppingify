@@ -19,11 +19,6 @@ export const CartFullItemsTitle = styled.div`
   display: inline-flex;
   justify-content: space-between;
   align-items: center;
-
-  .on-toggle-edit-btn {
-    border: 0;
-    background: none;
-  }
 `;
 
 export const Title = styled.p`
@@ -85,11 +80,6 @@ export const CartItemOperation = styled.div`
   .increase {
     background: #fff;
   }
-`;
-
-export const CartItemCheckBox = styled.input`
-  margin: 0;
-  border: 1px solid ${({ theme }) => theme.colors.primary};
 `;
 
 export const CartSave = styled.div`

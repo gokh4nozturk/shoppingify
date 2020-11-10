@@ -58,32 +58,43 @@ export const ProductsView = styled.div`
 `;
 
 export const ContainerProduct = styled.div`
+  padding: 0.1em 0.3em;
   display: inline-grid;
-  grid-template-columns: minmax(120px, 30%) 1fr;
+  grid-template-columns: 1fr minmax(50px, 10%);
   align-items: center;
   width: 100%;
   height: 4rem;
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
   border-radius: 12px;
+`;
 
-  .btn-add-to-list {
-    grid-column: 2/3;
-    height: 1.5em;
-    width: 1.5em;
-    font-size: 1.4em;
-    color: #c1c1c4;
-    border: 0;
-    background: #ffffff;
-  }
+export const ProductNameContainer = styled.div`
+  grid-column: 1/2;
+  display: inline-flex;
+  justify-content: flex-start;
+`;
 
-  .product-name {
-    grid-column: 1/2;
-    padding: 0.2em 0.3em;
-    margin: 0;
-  }
+export const ProductName = styled.p`
+  padding: 0.2em 0.3em;
+  margin: 0;
+`;
 
-  .btn-add-to-list:hover {
+export const AddToListBtnContainer = styled.div`
+  grid-column: 2/3;
+  display: inline-flex;
+  justify-content: flex-end;
+`;
+
+export const AddToListBtn = styled.button`
+  height: 1.5em;
+  width: 1.5em;
+  font-size: 1.4em;
+  color: #c1c1c4;
+  border: 0;
+  background: #ffffff;
+
+  &:hover {
     cursor: pointer;
   }
 `;

@@ -101,7 +101,7 @@ export const ProductsView = styled.div`
 
 export const ContainerProduct = styled.div`
   display: inline-grid;
-  grid-template-columns: minmax(120px, 30%) 1fr;
+  grid-template-columns: 1fr minmax(50px, 10%);
   align-items: center;
   width: 100%;
   height: 4rem;
