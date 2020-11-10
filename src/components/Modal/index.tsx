@@ -17,7 +17,7 @@ const CancelPopUp = () => {
       <BtnContainer>
         <CloseBtn onClick={isControlPopUpToggle}>X</CloseBtn>
       </BtnContainer>
-      <Title>Are you sure that you want to cancel this list?</Title>
+      <Title>Are you sure that you want to delete this list?</Title>
       <BtnContainer>
         <CancelBtn onClick={isControlPopUpToggle}>Cancel</CancelBtn>
         <YesBtn>Yes</YesBtn>

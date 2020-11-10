@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Axios from "axios";
 import { useHistory } from "react-router-dom";
 
@@ -13,14 +19,27 @@ import {
   ProductsView,
   ProductsCategories,
   ProductsCategory,
+  CompleteContainer,
+  CompleteCancelBtn,
+  CompleteBtn,
+  CompleteDeleteBtn,
+  Transparent,
 } from "./style/styledDetails";
 import {
   BackButton,
   BtnBack,
 } from "../../components/ShoppingList/style/styleOverview";
-import { ShoppingDateContainer, ShoppingDateDetail } from "./style/styledIndex";
+import {
+  border,
+  ShoppingDateContainer,
+  ShoppingDateDetail,
+  ShoppingState,
+} from "./style/styledIndex";
+import { FiTrash2 } from "react-icons/fi";
 
 import { ProductType } from "../../components/Products/Product";
+import { Shopping } from "../../context";
+import CancelPopUp from "../../components/Modal";
 
 export interface HistoryType {
   _id: string;
@@ -37,18 +56,22 @@ const Details = ({ match }: any) => {
   const [list, setList] = useState<HistoryType[]>([]); //see the list
   const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]); //see the products in the list
   const [listCategories, setListCategories] = useState<string[]>([]); //see the products' categories
+  const { isControlPopUpToggle, onTogglePopUp } = useContext(Shopping);
+
+  const id = match.params.id;
+
   const d = new Date();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const fetchList = useCallback(async () => {
-    const newList = await Axios.get(`/api/history/${match.params.id}`)
+    const newList = await Axios.get(`/api/history/${id}`)
       .then((res) => res.data)
       .catch((err) => console.log(err));
 
     setList([newList]);
     setHistoryProduct(newList.listItem);
-  }, [match]);
+  }, [id]);
 
   const fetchCategories = useCallback(() => {
     const category = historyProduct.reduce<string[]>((acc, cur) => {
@@ -61,6 +84,35 @@ const Details = ({ match }: any) => {
     }, []);
     setListCategories(category);
   }, [historyProduct]);
+
+  const UpdateTheHistory = useCallback(
+    (state) => {
+      Axios.put(`/api/history/${id}`, {
+        completed: state,
+      })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    [id]
+  );
+
+  const DeleteTheHistory = useCallback(
+    //this function will use with pop up
+    () => {
+      Axios.delete(`/api/history/${id}`)
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    },
+    [id]
+  );
 
   useEffect(() => {
     fetchList();
@@ -78,6 +130,8 @@ const Details = ({ match }: any) => {
 
   return (
     <Container>
+      {onTogglePopUp ? <Transparent onClick={isControlPopUpToggle} /> : null}
+      {onTogglePopUp ? <CancelPopUp /> : null}
       <BtnBack className="btn-back">
         <BackButton onClick={goBack}>
           <BsArrowLeft />
@@ -89,7 +143,13 @@ const Details = ({ match }: any) => {
         return (
           <Title key={item._id}>
             <SubTitle>{item.name}</SubTitle>
-            <ShoppingDateContainer>
+            <ShoppingState
+              className="complete-state"
+              color={item.completed ? border.completed : border.cancelled}
+            >
+              {item.completed ? `completed` : `cancelled`}
+            </ShoppingState>
+            <ShoppingDateContainer className="sub-title-date">
               <BsCalendar size="1.5rem" />
               <ShoppingDateDetail>
                 {days[d.getDay()] +
@@ -102,6 +162,30 @@ const Details = ({ match }: any) => {
                   d.getFullYear()}
               </ShoppingDateDetail>
             </ShoppingDateContainer>
+            <CompleteContainer>
+              <CompleteDeleteBtn
+                onClick={() => {
+                  DeleteTheHistory();
+                  goBack();
+                }}
+              >
+                <FiTrash2 size="1.5em" />
+              </CompleteDeleteBtn>
+              <CompleteCancelBtn
+                onClick={() => {
+                  UpdateTheHistory(false);
+                }}
+              >
+                Cancel
+              </CompleteCancelBtn>
+              <CompleteBtn
+                onClick={() => {
+                  UpdateTheHistory(true);
+                }}
+              >
+                Complete
+              </CompleteBtn>
+            </CompleteContainer>
           </Title>
         );
       })}

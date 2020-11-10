@@ -13,13 +13,63 @@ export const Container = styled.div`
 
 export const Title = styled.div`
   grid-row: 2/3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   margin: 2em 0;
+
+  .complete-state {
+    grid-column: 1/2;
+    width: fit-content;
+  }
+  .sub-title-date {
+    grid-column: 1/2;
+    display: inline-flex;
+    justify-content: flex-start;
+    margin: 1em 0;
+  }
 `;
 
 export const SubTitle = styled.p`
+  grid-column: 1/2;
   color: #34333a;
 
   font-size: ${({ theme }) => theme.fontSizes.xLarge};
+`;
+
+export const CompleteContainer = styled.div`
+  grid-column: 2/3;
+  display: inline-flex;
+  justify-content: flex-end;
+  width: 100%;
+  padding: 0.5em 1em;
+`;
+
+export const CompleteCancelBtn = styled.button`
+  margin-right: 0.1em;
+  border: 1px solid #eb5757;
+  background: #fff;
+  padding: 0.2em 0.4em;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
+export const CompleteBtn = styled.button`
+  margin-left: 0.1em;
+  border: none;
+  background: #56ccf2;
+  color: #fff;
+  padding: 0.2em 0.4em;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
+export const CompleteDeleteBtn = styled.button`
+  margin-right: 0.1em;
+
+  border: none;
+  background: none;
+  padding: 0.2em 0.4em;
+  color: #eb5757;
 `;
 
 export const ProductsCategories = styled.div`
@@ -72,4 +122,16 @@ export const PPieces = styled.p`
   padding: 0.5em;
   font-size: ${({ theme }) => theme.fontSizes.small};
   color: ${({ theme }) => theme.colors.primary};
+`;
+export const Transparent = styled.div`
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.75);
+  filter: blur(2px);
+  z-index: 10;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 `;

@@ -14,9 +14,6 @@ import {
   CartItemNumber,
   CartItemOperation,
   CartItemCheckBox,
-  CartCompletedBtn,
-  CartCompleteCancelBtn,
-  CartCompleteContainer,
 } from "./style/styleCart";
 
 import { Source, UndrawShoppingApp } from "../icons";
@@ -32,14 +29,12 @@ const List = () => {
     removeFromCart,
     isControlToggleAddItem,
     toggleCartCompleted,
-    isControlPopUpToggle,
   } = useContext(Shopping);
   const [onToggleEdit, setOnToggleEdit] = useState(false);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
   const [completedClass, setCompletedClass] = useState("");
   const [nameVal, setNameVal] = useState("");
-  const [completeValue, setCompleteValue] = useState<boolean>(false);
 
   const isThereAnyClass = isThereAny ? "is-there" : "";
   const isThereAnyClassContainer = isThereAny ? "is-there-container" : "";
@@ -177,47 +172,32 @@ const List = () => {
         </CartNoItems>
       )}
 
-      {onToggleEdit ? (
-        <CartCompleteContainer>
-          <CartCompleteCancelBtn onClick={isControlPopUpToggle}>
-            Cancel
-          </CartCompleteCancelBtn>
-          <CartCompletedBtn
+      <CartSave>
+        <div className={`save-container ${isThereAnyClassContainer}`}>
+          <input
+            value={nameVal}
+            onChange={(e) => {
+              setNameVal(e.currentTarget.value);
+            }}
+            className="text-box-cart"
+            type="text"
+            name="history-name"
+            id="historyName"
+            placeholder="Enter a name"
+            required
+          />
+
+          <button
+            className={`btn-save-cart ${isThereAnyClass}`}
+            type="submit"
             onClick={() => {
-              setCompleteValue(true);
+              addToHistory(cart);
             }}
           >
-            Complete
-          </CartCompletedBtn>
-        </CartCompleteContainer>
-      ) : (
-        <CartSave>
-          <div className={`save-container ${isThereAnyClassContainer}`}>
-            <input
-              value={nameVal}
-              onChange={(e) => {
-                setNameVal(e.currentTarget.value);
-              }}
-              className="text-box-cart"
-              type="text"
-              name="history-name"
-              id="historyName"
-              placeholder="Enter a name"
-              required
-            />
-
-            <button
-              className={`btn-save-cart ${isThereAnyClass}`}
-              type="submit"
-              onClick={() => {
-                addToHistory(cart);
-              }}
-            >
-              Save
-            </button>
-          </div>
-        </CartSave>
-      )}
+            Save
+          </button>
+        </div>
+      </CartSave>
     </CartContainer>
   );
 };
