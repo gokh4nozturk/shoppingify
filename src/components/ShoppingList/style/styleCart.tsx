@@ -3,7 +3,7 @@ import { FadeIn } from "../../../theme/globalStyles";
 
 export const CartContainer = styled.div`
   display: inline-grid;
-  grid-template-rows: 200px 1fr 130px;
+  grid-template-rows: 12.5rem 1fr 8.125rem;
   background: #fff0de;
   height: 100%;
 `;
@@ -12,7 +12,7 @@ export const CartFullItems = styled.div`
   display: inline-flex;
   flex-direction: column;
   overflow-y: auto;
-  padding: 0 40px;
+  padding: 0 2.5rem;
 `;
 
 export const CartFullItemsTitle = styled.div`
@@ -29,9 +29,9 @@ export const Title = styled.p`
 `;
 
 export const CartItemContainer = styled.div`
-  display: inline-flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr minmax(10rem, 10%);
+  grid-gap: 0.1em;
   padding: 1em 0;
   font-weight: 500;
   height: 4rem;
@@ -40,12 +40,24 @@ export const CartItemContainer = styled.div`
 `;
 
 export const CartItemName = styled.p`
+  grid-column: 1/2;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
   text-decoration: ${(props) => props.theme.main};
   margin: 0;
 `;
 
+export const CartItemOp = styled.div`
+  grid-column: 2/3;
+  display: inline-flex;
+  justify-content: flex-end;
+  align-items: center;
+`;
+
 export const CartItemNumber = styled.span`
-  padding: 5px 10px;
+  width: fit-content;
+  padding: 0.4em 0.8em;
 
   color: ${({ theme }) => theme.colors.primary};
   font-size: ${({ theme }) => theme.fontSizes.small};
@@ -63,23 +75,18 @@ export const CartItemOperation = styled.div`
 
   border-radius: ${({ theme }) => theme.radius.secondary};
 
-  .operation-elements {
-    border: 0;
-    color: ${({ theme }) => theme.colors.primary};
-  }
-
   .remove {
     height: 2.2em;
     color: #fff;
     background: ${({ theme }) => theme.colors.primary};
     border-radius: ${({ theme }) => theme.radius.secondary};
   }
-  .decrease {
-    background: #fff;
-  }
-  .increase {
-    background: #fff;
-  }
+`;
+
+export const CartItemOpBtn = styled.button`
+  background: #fff;
+  border: 0;
+  color: ${({ theme }) => theme.colors.primary};
 `;
 
 export const CartSave = styled.div`
@@ -87,43 +94,8 @@ export const CartSave = styled.div`
   display: inline-grid;
   place-items: center;
   width: 100%;
-  height: 130px;
+  height: 8.125rem;
   background: #fff;
-
-  .save-container {
-    display: inline-flex;
-    justify-content: center;
-    width: 310px;
-    height: 64px;
-    border: 2px solid #c1c1c4;
-    box-sizing: border-box;
-
-    border-radius: ${({ theme }) => theme.radius.secondary};
-  }
-
-  .text-box-cart {
-    display: inline-flex;
-    width: 220px;
-    height: 60px;
-    border: 0;
-    color: #bdbdbd;
-    box-sizing: border-box;
-
-    font-size: ${({ theme }) => theme.fontSizes.medium};
-    border-radius: ${({ theme }) => theme.radius.secondary};
-  }
-
-  .btn-save-cart {
-    height: 35px;
-    border: 0;
-    width: 90px;
-    height: 60px;
-    color: #fff;
-    box-sizing: border-box;
-    background: #c1c1c4;
-
-    border-radius: ${({ theme }) => theme.radius.secondary};
-  }
 
   .is-there-container {
     border: 2px solid ${({ theme }) => theme.colors.primary};
@@ -135,25 +107,59 @@ export const CartSave = styled.div`
   }
 `;
 
+export const SavingContainer = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  width: 20rem;
+  height: 4rem;
+  border: 2px solid #c1c1c4;
+  box-sizing: border-box;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
+export const CartSaveTB = styled.input`
+  display: inline-flex;
+  width: 13.75rem;
+  height: 3.75rem;
+  border: 0;
+  color: #bdbdbd;
+  box-sizing: border-box;
+
+  font-size: ${({ theme }) => theme.fontSizes.medium};
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
+export const CartSaveBtn = styled.button`
+  border: 0;
+  width: 6rem;
+  height: 3.75rem;
+  color: #fff;
+  box-sizing: border-box;
+  background: #c1c1c4;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
+`;
+
 export const CartNoItems = styled.div`
   grid-row: 2/3;
   display: inline-grid;
   grid-template-rows: 1fr 1fr;
   margin: 40px;
   margin-bottom: 0;
+`;
 
-  .no-items-p {
-    grid: 1/2;
-    display: inline-grid;
-    place-items: center;
-  }
+export const NoItemsMessage = styled.div`
+  grid: 1/2;
+  display: inline-grid;
+  place-items: center;
+`;
 
-  .no-items-logo {
-    grid: 2/3;
-    display: inline-flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding: 0;
-    margin: 0;
-  }
+export const NoItemsLogo = styled.div`
+  grid: 2/3;
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0;
+  margin: 0;
 `;

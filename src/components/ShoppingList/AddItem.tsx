@@ -87,7 +87,11 @@ const AddItem = () => {
           </DatalistCategories>
         </InputContainer>
         <BtnContainer>
-          <button className="btn-cancel buttons" onClick={() => {}}>
+          <button
+            className="btn-cancel buttons"
+            type="reset"
+            onClick={() => {}}
+          >
             Cancel
           </button>
           <button className="btn-save buttons" type="submit">

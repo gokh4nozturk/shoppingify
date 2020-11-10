@@ -8,6 +8,7 @@ import {
   ProductName,
   ProductNameContainer,
 } from "./styled";
+import { HiPlus } from "react-icons/hi";
 
 export interface ProductType {
   _id: string;
@@ -42,7 +43,7 @@ const Product = ({ ...item }: ProductType) => {
             addToCart(item);
           }}
         >
-          +
+          <HiPlus />
         </AddToListBtn>
       </AddToListBtnContainer>
     </ContainerProduct>

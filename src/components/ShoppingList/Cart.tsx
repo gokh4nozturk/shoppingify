@@ -13,6 +13,13 @@ import {
   CartItemName,
   CartItemNumber,
   CartItemOperation,
+  CartItemOp,
+  CartItemOpBtn,
+  NoItemsMessage,
+  NoItemsLogo,
+  SavingContainer,
+  CartSaveTB,
+  CartSaveBtn,
 } from "./style/styleCart";
 
 import { Source, UndrawShoppingApp } from "../icons";
@@ -77,66 +84,65 @@ const List = () => {
               <CartItemContainer>
                 <CartItemName>{item.name}</CartItemName>
 
-                {onToggleOperation ? (
-                  <CartItemOperation
-                    onMouseLeave={() => {
-                      setOnToggleOperation(!onToggleOperation);
-                    }}
-                  >
-                    <button
-                      className="remove operation-elements"
-                      onClick={() => {
-                        removeFromCart(item);
+                <CartItemOp>
+                  {onToggleOperation ? (
+                    <CartItemOperation
+                      onMouseLeave={() => {
+                        setOnToggleOperation(!onToggleOperation);
                       }}
                     >
-                      <FiTrash2 />
-                    </button>
-                    <button
-                      className="decrease operation-elements"
-                      onClick={() => {
-                        item.count--;
+                      <CartItemOpBtn
+                        className="remove"
+                        onClick={() => {
+                          removeFromCart(item);
+                        }}
+                      >
+                        <FiTrash2 />
+                      </CartItemOpBtn>
+                      <CartItemOpBtn
+                        onClick={() => {
+                          item.count--;
+                        }}
+                      >
+                        <FiMinus />
+                      </CartItemOpBtn>
+                      <CartItemNumber>{`${item.count} pcs`}</CartItemNumber>
+                      <CartItemOpBtn
+                        onClick={() => {
+                          item.count++;
+                        }}
+                      >
+                        <HiPlus />
+                      </CartItemOpBtn>
+                    </CartItemOperation>
+                  ) : (
+                    <CartItemNumber
+                      onMouseOver={() => {
+                        setOnToggleOperation(!onToggleOperation);
                       }}
-                    >
-                      <FiMinus />
-                    </button>
-                    <CartItemNumber>{`${item.count} pcs`}</CartItemNumber>
-                    <button
-                      className="increase operation-elements"
-                      onClick={() => {
-                        item.count++;
-                      }}
-                    >
-                      <HiPlus />
-                    </button>
-                  </CartItemOperation>
-                ) : (
-                  <CartItemNumber
-                    onMouseOver={() => {
-                      setOnToggleOperation(!onToggleOperation);
-                    }}
-                  >{`${item.count} pcs`}</CartItemNumber>
-                )}
+                    >{`${item.count} pcs`}</CartItemNumber>
+                  )}
+                </CartItemOp>
               </CartItemContainer>
             );
           })}
         </CartFullItems>
       ) : (
         <CartNoItems>
-          <div className="no-items-p">No Items</div>
-          <div className="no-items-logo">
+          <NoItemsMessage>No Items</NoItemsMessage>
+          <NoItemsLogo>
             <UndrawShoppingApp />
-          </div>
+          </NoItemsLogo>
         </CartNoItems>
       )}
 
       <CartSave>
-        <div className={`save-container ${isThereAnyClassContainer}`}>
-          <input
+        <SavingContainer className={`${isThereAnyClassContainer}`}>
+          <CartSaveTB
             value={nameVal}
             onChange={(e) => {
               setNameVal(e.currentTarget.value);
             }}
-            className="text-box-cart"
             type="text"
             name="history-name"
             id="historyName"
@@ -144,8 +150,8 @@ const List = () => {
             required
           />
 
-          <button
-            className={`btn-save-cart ${isThereAnyClass}`}
+          <CartSaveBtn
+            className={`${isThereAnyClass}`}
             type="submit"
             onClick={() => {
               addToHistory(cart);
@@ -153,8 +159,8 @@ const List = () => {
             }}
           >
             Save
-          </button>
-        </div>
+          </CartSaveBtn>
+        </SavingContainer>
       </CartSave>
     </CartContainer>
   );
