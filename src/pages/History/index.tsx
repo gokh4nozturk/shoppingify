@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-import { HistoryType } from "./Details";
+import React, { useContext } from "react";
 
 import {
   Container,
@@ -17,14 +15,11 @@ import {
 } from "./style/styledIndex";
 import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
-import Axios from "axios";
 import { Link } from "react-router-dom";
-
-type ResponseType = undefined | HistoryType[];
+import { Shopping } from "../../context";
 
 const History = () => {
-  const [history, setHistories] = useState<HistoryType[]>([]);
-
+  const { history } = useContext(Shopping);
   const historyDate = new Date();
   const months = [
     "January",
@@ -40,18 +35,6 @@ const History = () => {
     "November",
     "December",
   ];
-
-  const getHistory = async () => {
-    const newHistories: ResponseType = await Axios.get("/api/histories")
-      .then((res) => res.data)
-      .catch((err) => console.log(err));
-
-    setHistories(newHistories);
-  };
-
-  useEffect(() => {
-    getHistory();
-  }, [history]);
 
   return (
     <>

@@ -12,6 +12,15 @@ export interface ProductType {
   completed: boolean;
 }
 
+export interface HistoryType {
+  _id: string;
+  name: string;
+  listItem: ProductType[];
+  completed: boolean;
+  createdAt: Date;
+  pieces: number;
+}
+
 export type ShoppingType = {
   products: ProductType[];
   cart: ProductType[];
@@ -20,6 +29,7 @@ export type ShoppingType = {
   onToggleOverview: boolean;
   onToggleAddItem: boolean;
   onTogglePopUp: boolean;
+  history: HistoryType[];
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType) => void;
   removeFromCart: (item: ProductType) => void;
@@ -37,6 +47,7 @@ const DefaultShopping: ShoppingType = {
   onToggleOverview: false,
   onToggleAddItem: false,
   onTogglePopUp: false,
+  history: [],
   addProduct: () => {},
   addToCart: () => {},
   removeFromCart: () => {},
@@ -49,6 +60,7 @@ const DefaultShopping: ShoppingType = {
 const Shopping = React.createContext(DefaultShopping);
 
 type ResponseType = undefined | ProductType[];
+type ResponseType2 = undefined | HistoryType[];
 
 const Provider: React.FC<{}> = (props) => {
   const [products, setProducts] = useState<ProductType[]>([]);
@@ -58,6 +70,7 @@ const Provider: React.FC<{}> = (props) => {
   const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
   const [onToggleAddItem, setOnToggleAddItem] = useState<boolean>(false);
   const [onTogglePopUp, setOnTogglePopUp] = useState<boolean>(false);
+  const [history, setHistories] = useState<HistoryType[]>([]);
 
   const addProduct: ShoppingType["addProduct"] = useCallback(
     (item) => {
@@ -143,9 +156,18 @@ const Provider: React.FC<{}> = (props) => {
     setProducts(newProducts);
   };
 
+  const getHistory = async () => {
+    const newHistories: ResponseType2 = await Axios.get("/api/histories")
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
+
+    setHistories(newHistories);
+  };
+
   useEffect(() => {
     fetchData();
-  }, [products]);
+    getHistory();
+  }, [products, history]);
 
   return (
     <Shopping.Provider
@@ -157,6 +179,7 @@ const Provider: React.FC<{}> = (props) => {
         onToggleOverview,
         onToggleAddItem,
         onTogglePopUp,
+        history,
         addProduct,
         addToCart,
         removeFromCart,
