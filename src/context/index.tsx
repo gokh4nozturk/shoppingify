@@ -31,7 +31,7 @@ export type ShoppingType = {
   onTogglePopUp: boolean;
   history: HistoryType[];
   addProduct: (item: ProductType) => void;
-  addToCart: (item: ProductType) => void;
+  addToCart: (item: ProductType, count?: number) => void;
   removeFromCart: (item: ProductType) => void;
   addToOverview: (item: ProductType) => void;
   isControlToggleOverview: (item: boolean) => void;
@@ -80,21 +80,25 @@ const Provider: React.FC<{}> = (props) => {
   );
 
   const addToCart: ShoppingType["addToCart"] = useCallback(
-    (item) => {
-      const cartItem = cart.slice();
+    (item, count) => {
+      let cartItems = [...cart];
+      const itemCount = count ? count : 1;
       //check!! is there already product in cart if add to cart the product
-      let alreadyInCart = false;
-      cartItem.forEach((el) => {
-        if (el._id === item._id) {
-          el.count++;
-          alreadyInCart = true;
-        }
+      const insideCartItem = cartItems.find((cartItem) => {
+        return cartItem._id === item._id;
       });
-      if (!alreadyInCart) {
+
+      if (!insideCartItem) {
         //if there is not the product, add to cart
-        cartItem.push({ ...item, count: 1 });
+        cartItems = [...cartItems, { ...item, count: itemCount }];
+      } else {
+        cartItems = cartItems.map((i) =>
+          i._id === item._id
+            ? { ...insideCartItem, count: itemCount + insideCartItem.count }
+            : i
+        );
       }
-      setCart(cartItem);
+      setCart(cartItems);
     },
     [cart]
   );
@@ -167,7 +171,7 @@ const Provider: React.FC<{}> = (props) => {
   useEffect(() => {
     fetchData();
     getHistory();
-  }, [products, history]);
+  }, [products]);
 
   return (
     <Shopping.Provider

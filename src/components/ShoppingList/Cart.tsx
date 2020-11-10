@@ -26,15 +26,11 @@ import { Source, UndrawShoppingApp } from "../icons";
 import { HiPlus } from "react-icons/hi";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
 import Axios from "axios";
+import CartItem from "./CartItem";
 
 const List = () => {
-  const {
-    cart,
+  const { cart, isControlToggleAddItem } = useContext(Shopping);
 
-    removeFromCart,
-    isControlToggleAddItem,
-  } = useContext(Shopping);
-  const [onToggleOperation, setOnToggleOperation] = useState(false);
   const [isThereAny, setIsThereAny] = useState(false);
   const [nameVal, setNameVal] = useState("");
   const isThereAnyClass = isThereAny ? "is-there" : "";
@@ -80,51 +76,7 @@ const List = () => {
           </CartFullItemsTitle>
 
           {cart.map((item) => {
-            return (
-              <CartItemContainer>
-                <CartItemName>{item.name}</CartItemName>
-
-                <CartItemOp>
-                  {onToggleOperation ? (
-                    <CartItemOperation
-                      onMouseLeave={() => {
-                        setOnToggleOperation(!onToggleOperation);
-                      }}
-                    >
-                      <CartItemOpBtn
-                        className="remove"
-                        onClick={() => {
-                          removeFromCart(item);
-                        }}
-                      >
-                        <FiTrash2 />
-                      </CartItemOpBtn>
-                      <CartItemOpBtn
-                        onClick={() => {
-                          item.count--;
-                        }}
-                      >
-                        <FiMinus />
-                      </CartItemOpBtn>
-                      <CartItemNumber>{`${item.count} pcs`}</CartItemNumber>
-                      <CartItemOpBtn
-                        onClick={() => {
-                          item.count++;
-                        }}
-                      >
-                        <HiPlus />
-                      </CartItemOpBtn>
-                    </CartItemOperation>
-                  ) : (
-                    <CartItemNumber
-                      onMouseOver={() => {
-                        setOnToggleOperation(!onToggleOperation);
-                      }}
-                    >{`${item.count} pcs`}</CartItemNumber>
-                  )}
-                </CartItemOp>
-              </CartItemContainer>
-            );
+            return <CartItem item={item} />;
           })}
         </CartFullItems>
       ) : (

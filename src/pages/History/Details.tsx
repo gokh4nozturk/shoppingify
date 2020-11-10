@@ -6,7 +6,7 @@ import React, {
   useState,
 } from "react";
 import Axios from "axios";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import { BsArrowLeft, BsCalendar } from "react-icons/bs";
 import {
@@ -37,7 +37,7 @@ import {
 } from "./style/styledIndex";
 import { FiTrash2 } from "react-icons/fi";
 
-import { ProductType } from "../../components/Products/Product";
+import { ProductType } from "../Products/Product";
 import { Shopping } from "../../context";
 import CancelPopUp from "../../components/Modal";
 
@@ -50,19 +50,17 @@ export interface HistoryType {
   pieces: number;
 }
 
-const Details = ({ match }: any) => {
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const d = new Date();
+
+const Details = () => {
   const [filter, setFilter] = useState("");
   const { goBack } = useHistory();
+  const { id } = useParams<{ id: string }>();
   const [list, setList] = useState<HistoryType[]>([]); //see the list
   const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]); //see the products in the list
   const [listCategories, setListCategories] = useState<string[]>([]); //see the products' categories
   const { isControlPopUpToggle, onTogglePopUp } = useContext(Shopping);
-
-  const id = match.params.id;
-
-  const d = new Date();
-
-  const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   const fetchList = useCallback(async () => {
     const newList = await Axios.get(`/api/history/${id}`)
@@ -106,12 +104,13 @@ const Details = ({ match }: any) => {
       Axios.delete(`/api/history/${id}`)
         .then(function (response) {
           console.log(response);
+          goBack();
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-    [id]
+    [id, goBack]
   );
 
   useEffect(() => {
@@ -152,21 +151,16 @@ const Details = ({ match }: any) => {
             <ShoppingDateContainer className="sub-title-date">
               <BsCalendar size="1.5rem" />
               <ShoppingDateDetail>
-                {days[d.getDay()] +
-                  "  " +
-                  "" +
-                  d.getMonth() +
-                  " " +
-                  d.getDate() +
-                  " " +
-                  d.getFullYear()}
+                {/* 1) date-fns  */}
+                {/* {https://date-fns.org/ , https://date-fns.org/v2.16.1/docs/format
+                 */}
+                {/* d.toLocaleFormat() */}
               </ShoppingDateDetail>
             </ShoppingDateContainer>
             <CompleteContainer>
               <CompleteDeleteBtn
                 onClick={() => {
                   DeleteTheHistory();
-                  goBack();
                 }}
               >
                 <FiTrash2 size="1.5em" />

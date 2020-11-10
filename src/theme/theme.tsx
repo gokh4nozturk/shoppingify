@@ -1,4 +1,4 @@
-export default {
+const theme = {
   colors: {
     primary: " #F9A109",
     secondary: "#FAFAFE",
@@ -63,3 +63,5 @@ export default {
     bellow786: `only screen and (max-width: 768px)`,
   },
 };
+
+export default theme;
