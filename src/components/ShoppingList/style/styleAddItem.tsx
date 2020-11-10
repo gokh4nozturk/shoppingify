@@ -61,15 +61,14 @@ export const TitleAddItem = styled.div`
   width: 9em;
   height: 100%;
 
-  margin: 35px;
+  margin: 0 2.2rem;
   text-align: left;
   font-weight: 500;
-  font-size: 24px;
+  font-size: ${({ theme }) => theme.fontSizes.xLarge};
 `;
 
 export const FormContainer = styled.form`
   grid-row: 3/4;
-  margin-top: 50px;
   display: inline-flex;
   flex-direction: column;
   justify-content: center;
@@ -83,12 +82,12 @@ export const FormContainer = styled.form`
 export const InputContainer = styled.div`
   display: inline-flex;
   flex-direction: column;
-  margin-bottom: 4em;
+  margin-bottom: 3em;
 `;
 
 export const InputElement = styled.input`
-  height: 61.25px;
-  width: 309.88665771484375px;
+  height: 4rem;
+  width: 20rem;
   border: 2px solid #bdbdbd;
   color: #bdbdbd;
   margin-top: 1em;
@@ -101,24 +100,42 @@ export const InputElement = styled.input`
   }
 `;
 
-export const DatalistCategories = styled.datalist`
-  height: 61.25px;
-  width: 309.88665771484375px;
+export const InputElementArea = styled.textarea`
+  width: 20rem;
   border: 2px solid #bdbdbd;
+  color: #bdbdbd;
   margin-top: 1em;
+  padding: 1.5em 0;
+  min-height: 4rem;
+  max-height: 220px;
+  resize: vertical;
 
   border-radius: ${({ theme }) => theme.radius.secondary};
 
   &:focus {
     border-color: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.primary};
   }
+`;
 
+export const DatalistCategories = styled.datalist`
+  height: 4rem;
+  width: 20rem;
+  border: 2px solid #bdbdbd;
+  margin-top: 1em;
+
+  border-radius: ${({ theme }) => theme.radius.secondary};
   font-size: ${({ theme }) => theme.fontSizes.large};
+
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
 `;
 
 export const OptionCategories = styled.option`
   padding: 10px 15px;
   margin: 0;
+  background: #fff;
 
   border-radius: ${({ theme }) => theme.radius.secondary};
 `;

@@ -10,6 +10,7 @@ import {
   OptionCategories,
   DatalistCategories,
   TitleAddItem,
+  InputElementArea,
 } from "./style/styleAddItem";
 import { BackButton, BtnBack } from "./style/styleOverview";
 
@@ -52,8 +53,8 @@ const AddItem = () => {
         <InputContainer>
           <label htmlFor="note-item">Note (optional)</label>
 
-          <InputElement
-            type="text"
+          <InputElementArea
+            rows={6}
             name="note"
             id="note-item"
             placeholder="Enter a note"
