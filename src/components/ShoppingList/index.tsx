@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import AddItem from "./AddItem";
-import Cart from "./Cart";
+import Cart from "./cart/Cart";
 
 import styled from "styled-components";
 import { Shopping } from "../../context";
-import Overview from "./Overview";
+import Overview from "./overview/Overview";
 
 const SLContainer = styled.div`
   display: inline-flex;

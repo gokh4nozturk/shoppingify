@@ -11,8 +11,10 @@ import {
   SearchBox,
 } from "./styled";
 import { ProductType, Shopping } from "../../context";
+import { useTitle } from "react-use";
 
 const Products = () => {
+  useTitle("Shoppingify");
   const [filter, setFilter] = useState("");
   const { products, categories } = useContext(Shopping);
 

@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
-import { Shopping } from "../../context";
+import { Shopping } from "../../../context";
 
-import { CartAddItem } from "./style/styleAddItem";
+import { CartAddItem } from "../style/styleAddItem";
 import {
   CartContainer,
   CartFullItems,
@@ -9,22 +9,14 @@ import {
   CartSave,
   CartFullItemsTitle,
   Title,
-  CartItemContainer,
-  CartItemName,
-  CartItemNumber,
-  CartItemOperation,
-  CartItemOp,
-  CartItemOpBtn,
   NoItemsMessage,
   NoItemsLogo,
   SavingContainer,
   CartSaveTB,
   CartSaveBtn,
-} from "./style/styleCart";
+} from "../style/styleCart";
 
-import { Source, UndrawShoppingApp } from "../icons";
-import { HiPlus } from "react-icons/hi";
-import { FiMinus, FiTrash2 } from "react-icons/fi";
+import { Source, UndrawShoppingApp } from "../../icons";
 import Axios from "axios";
 import CartItem from "./CartItem";
 

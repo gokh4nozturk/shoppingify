@@ -171,7 +171,7 @@ const Provider: React.FC<{}> = (props) => {
   useEffect(() => {
     fetchData();
     getHistory();
-  }, [products]);
+  }, []);
 
   return (
     <Shopping.Provider

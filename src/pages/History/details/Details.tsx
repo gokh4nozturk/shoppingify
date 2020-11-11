@@ -8,10 +8,8 @@ import React, {
 import Axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
-import { BsArrowLeft, BsCalendar } from "react-icons/bs";
+import { BsArrowLeft } from "react-icons/bs";
 import {
-  SubTitle,
-  Title,
   Container,
   PName,
   PPieces,
@@ -19,27 +17,17 @@ import {
   ProductsView,
   ProductsCategories,
   ProductsCategory,
-  CompleteContainer,
-  CompleteCancelBtn,
-  CompleteBtn,
-  CompleteDeleteBtn,
   Transparent,
-} from "./style/styledDetails";
+} from "../style/styledDetails";
 import {
   BackButton,
   BtnBack,
-} from "../../components/ShoppingList/style/styleOverview";
-import {
-  border,
-  ShoppingDateContainer,
-  ShoppingDateDetail,
-  ShoppingState,
-} from "./style/styledIndex";
-import { FiTrash2 } from "react-icons/fi";
+} from "../../../components/ShoppingList/style/styleOverview";
 
-import { ProductType } from "../Products/Product";
-import { Shopping } from "../../context";
-import CancelPopUp from "../../components/Modal";
+import { ProductType } from "../../Products/Product";
+import { Shopping } from "../../../context";
+import CancelPopUp from "../../../components/Modal";
+import DetailsTitle from "./detailsTitle";
 
 export interface HistoryType {
   _id: string;
@@ -49,9 +37,6 @@ export interface HistoryType {
   createdAt: Date;
   pieces: number;
 }
-
-const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-const d = new Date();
 
 const Details = () => {
   const [filter, setFilter] = useState("");
@@ -83,36 +68,6 @@ const Details = () => {
     setListCategories(category);
   }, [historyProduct]);
 
-  const UpdateTheHistory = useCallback(
-    (state) => {
-      Axios.put(`/api/history/${id}`, {
-        completed: state,
-      })
-        .then(function (response) {
-          console.log(response);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    [id]
-  );
-
-  const DeleteTheHistory = useCallback(
-    //this function will use with pop up
-    () => {
-      Axios.delete(`/api/history/${id}`)
-        .then(function (response) {
-          console.log(response);
-          goBack();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    },
-    [id, goBack]
-  );
-
   useEffect(() => {
     fetchList();
     fetchCategories();
@@ -139,49 +94,7 @@ const Details = () => {
       </BtnBack>
 
       {list.map((item) => {
-        return (
-          <Title key={item._id}>
-            <SubTitle>{item.name}</SubTitle>
-            <ShoppingState
-              className="complete-state"
-              color={item.completed ? border.completed : border.cancelled}
-            >
-              {item.completed ? `completed` : `cancelled`}
-            </ShoppingState>
-            <ShoppingDateContainer className="sub-title-date">
-              <BsCalendar size="1.5rem" />
-              <ShoppingDateDetail>
-                {/* 1) date-fns  */}
-                {/* {https://date-fns.org/ , https://date-fns.org/v2.16.1/docs/format
-                 */}
-                {/* d.toLocaleFormat() */}
-              </ShoppingDateDetail>
-            </ShoppingDateContainer>
-            <CompleteContainer>
-              <CompleteDeleteBtn
-                onClick={() => {
-                  DeleteTheHistory();
-                }}
-              >
-                <FiTrash2 size="1.5em" />
-              </CompleteDeleteBtn>
-              <CompleteCancelBtn
-                onClick={() => {
-                  UpdateTheHistory(false);
-                }}
-              >
-                Cancel
-              </CompleteCancelBtn>
-              <CompleteBtn
-                onClick={() => {
-                  UpdateTheHistory(true);
-                }}
-              >
-                Complete
-              </CompleteBtn>
-            </CompleteContainer>
-          </Title>
-        );
+        return <DetailsTitle item={item} id={id} />;
       })}
 
       <ProductsCategories>

@@ -7,7 +7,7 @@ import { Provider } from "./context";
 import Products from "./pages/Products/Products";
 import Statistics from "./pages/Statistics";
 import History from "./pages/History";
-import Details from "./pages/History/Details";
+import Details from "./pages/History/details/Details";
 
 import GlobalStyles from "./theme/globalStyles";
 import Theme from "./theme/theme";

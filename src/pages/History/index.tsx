@@ -17,8 +17,10 @@ import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { Shopping } from "../../context";
+import { useTitle } from "react-use";
 
 const History = () => {
+  useTitle("History");
   const { history } = useContext(Shopping);
   const historyDate = new Date();
   const months = [

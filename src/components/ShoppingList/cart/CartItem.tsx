@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { FiMinus, FiTrash2 } from "react-icons/fi";
 import { HiPlus } from "react-icons/hi";
-import { ProductType, Shopping } from "../../context";
+import { ProductType, Shopping } from "../../../context";
 import {
   CartItemContainer,
   CartItemName,
@@ -9,7 +9,7 @@ import {
   CartItemOp,
   CartItemOpBtn,
   CartItemOperation,
-} from "./style/styleCart";
+} from "../style/styleCart";
 
 interface Props {
   item: ProductType;
