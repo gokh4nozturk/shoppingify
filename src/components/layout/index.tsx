@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import Navigation from "../../components/Navigation";
-import ShoppingList from "../../components/ShoppingList";
+import Navigation from "../navigation";
+import ShoppingList from "../shoppingList";
 import { Container } from "./styled";
 
 const Layout: React.FC<{}> = ({ children }) => {

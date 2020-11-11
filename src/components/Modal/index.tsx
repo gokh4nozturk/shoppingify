@@ -2,12 +2,12 @@ import React, { useContext } from "react";
 import { Shopping } from "../../context";
 
 import {
-  Container,
   CloseBtn,
   Title,
   BtnContainer,
   CancelBtn,
   YesBtn,
+  Container,
 } from "./style";
 
 const CancelPopUp = () => {

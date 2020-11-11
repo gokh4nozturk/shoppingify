@@ -22,11 +22,11 @@ import {
 import {
   BackButton,
   BtnBack,
-} from "../../../components/ShoppingList/style/styleOverview";
+} from "../../../components/shoppingList/style/styleOverview";
 
-import { ProductType } from "../../Products/Product";
+import { ProductType } from "../../products/Product";
 import { Shopping } from "../../../context";
-import CancelPopUp from "../../../components/Modal";
+import CancelPopUp from "../../../components/modal";
 import DetailsTitle from "./detailsTitle";
 
 export interface HistoryType {

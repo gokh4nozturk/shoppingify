@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useCallback, useContext } from "react";
 import { Shopping } from "../../../context";
-import { ProductType } from "../../../pages/Products/Product";
+import { ProductType } from "../../../context";
 import {
   AddToCartButton,
   BtnContainer,

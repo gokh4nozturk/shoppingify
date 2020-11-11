@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Logo } from "../icons/";
+import { Logo } from "../icons";
 
-import { NavContainer } from "./styled";
 import { MdList, MdReplay, MdShoppingCart } from "react-icons/md";
 import { BiStats } from "react-icons/bi";
 import { Shopping } from "../../context";
+import { NavContainer } from "./styled";
 
 const Navigation = () => {
   const { cart } = useContext(Shopping);

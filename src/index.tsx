@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import { Provider } from "./context";
-import Products from "./pages/Products/Products";
-import Statistics from "./pages/Statistics";
-import History from "./pages/History";
-import Details from "./pages/History/details/Details";
+import Products from "./pages/products/Products";
+import Statistics from "./pages/statistics";
+import History from "./pages/history";
+import Details from "./pages/history/details/Details";
 
 import GlobalStyles from "./theme/globalStyles";
 import Theme from "./theme/theme";
