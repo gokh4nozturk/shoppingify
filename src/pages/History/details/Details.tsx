@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
 
@@ -17,7 +11,6 @@ import {
   ProductsView,
   ProductsCategories,
   ProductsCategory,
-  Transparent,
 } from "../style/styledDetails";
 import {
   BackButton,
@@ -25,8 +18,6 @@ import {
 } from "../../../components/shoppingList/style/styleOverview";
 
 import { ProductType } from "../../products/Product";
-import { Shopping } from "../../../context";
-import CancelPopUp from "../../../components/modal";
 import DetailsTitle from "./detailsTitle";
 
 export interface HistoryType {
@@ -45,7 +36,6 @@ const Details = () => {
   const [list, setList] = useState<HistoryType[]>([]); //see the list
   const [historyProduct, setHistoryProduct] = useState<ProductType[]>([]); //see the products in the list
   const [listCategories, setListCategories] = useState<string[]>([]); //see the products' categories
-  const { isControlPopUpToggle, onTogglePopUp } = useContext(Shopping);
 
   const fetchList = useCallback(async () => {
     const newList = await Axios.get(`/api/history/${id}`)
@@ -84,8 +74,6 @@ const Details = () => {
 
   return (
     <Container>
-      {onTogglePopUp ? <Transparent onClick={isControlPopUpToggle} /> : null}
-      {onTogglePopUp ? <CancelPopUp /> : null}
       <BtnBack className="btn-back">
         <BackButton onClick={goBack}>
           <BsArrowLeft />

@@ -1,8 +1,9 @@
-import Axios from "axios";
 import React, { useCallback } from "react";
+import { useHistory } from "react-router-dom";
+import Axios from "axios";
+
 import { BsCalendar } from "react-icons/bs";
 import { FiTrash2 } from "react-icons/fi";
-import { useHistory } from "react-router-dom";
 import { HistoryType } from "./Details";
 import {
   CompleteBtn,
@@ -28,7 +29,7 @@ const DetailsTitle = ({ item, id }: Props) => {
   const { goBack } = useHistory();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const d = new Date();
+  const d = new Date(`${item.createdAt}`);
 
   const UpdateTheHistory = useCallback(
     (state) => {
@@ -72,10 +73,13 @@ const DetailsTitle = ({ item, id }: Props) => {
       <ShoppingDateContainer className="sub-title-date">
         <BsCalendar size="1.5rem" />
         <ShoppingDateDetail>
-          {/* 1) date-fns  */}
-          {/* {https://date-fns.org/ , https://date-fns.org/v2.16.1/docs/format
-           */}
-          {/* d.toLocaleFormat() */}
+          {days[d.getDay()] +
+            " " +
+            d.getMonth() +
+            " " +
+            d.getDate() +
+            " " +
+            d.getFullYear()}
         </ShoppingDateDetail>
       </ShoppingDateContainer>
       <CompleteContainer>

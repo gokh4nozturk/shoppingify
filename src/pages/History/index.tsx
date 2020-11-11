@@ -1,4 +1,7 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { Shopping } from "../../context";
+import { useTitle } from "react-use";
 
 import {
   Container,
@@ -15,14 +18,11 @@ import {
 } from "./style/styledIndex";
 import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
-import { Link } from "react-router-dom";
-import { Shopping } from "../../context";
-import { useTitle } from "react-use";
 
 const History = () => {
   useTitle("History");
   const { history } = useContext(Shopping);
-  const historyDate = new Date();
+
   const months = [
     "January",
     "February",
@@ -46,9 +46,8 @@ const History = () => {
           return (
             <ResultsContainer key={item._id}>
               <ResultsMonth>
-                {`${
-                  months[historyDate.getMonth()]
-                } ${historyDate.getFullYear()}`}
+                {`${months[new Date(item.createdAt).getMonth()]} ` +
+                  new Date(item.createdAt).getFullYear()}
               </ResultsMonth>
               <ShoppingContainer>
                 <ShoppingName>{item.name}</ShoppingName>
@@ -57,11 +56,11 @@ const History = () => {
                   <ShoppingDateContainer>
                     <BsCalendar size="1.5rem" />
                     <ShoppingDateDetail>
-                      {historyDate.getMonth() +
+                      {new Date(item.createdAt).getMonth() +
                         "." +
-                        historyDate.getDate() +
+                        new Date(item.createdAt).getDate() +
                         "." +
-                        historyDate.getFullYear()}
+                        new Date(item.createdAt).getFullYear()}
                     </ShoppingDateDetail>
                   </ShoppingDateContainer>
                   <ShoppingState

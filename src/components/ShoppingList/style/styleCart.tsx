@@ -32,9 +32,8 @@ export const CartItemContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr minmax(10rem, 10%);
   grid-gap: 0.1em;
-  padding: 1em 0;
   font-weight: 500;
-  height: 4rem;
+  height: 3.3rem;
 
   font-size: ${({ theme }) => theme.fontSizes.large};
 `;

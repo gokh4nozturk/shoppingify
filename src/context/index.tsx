@@ -28,7 +28,6 @@ export type ShoppingType = {
   overviewItem: ProductType[];
   onToggleOverview: boolean;
   onToggleAddItem: boolean;
-  onTogglePopUp: boolean;
   history: HistoryType[];
   addProduct: (item: ProductType) => void;
   addToCart: (item: ProductType, count?: number) => void;
@@ -36,7 +35,6 @@ export type ShoppingType = {
   addToOverview: (item: ProductType) => void;
   isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
-  isControlPopUpToggle: () => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -46,7 +44,6 @@ const DefaultShopping: ShoppingType = {
   overviewItem: [],
   onToggleOverview: false,
   onToggleAddItem: false,
-  onTogglePopUp: false,
   history: [],
   addProduct: () => {},
   addToCart: () => {},
@@ -54,7 +51,6 @@ const DefaultShopping: ShoppingType = {
   addToOverview: () => {},
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
-  isControlPopUpToggle: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -69,7 +65,6 @@ const Provider: React.FC<{}> = (props) => {
   const [overviewItem, setOverviewItem] = useState<ProductType[]>([]);
   const [onToggleOverview, setOnToggleOverview] = useState<boolean>(false);
   const [onToggleAddItem, setOnToggleAddItem] = useState<boolean>(false);
-  const [onTogglePopUp, setOnTogglePopUp] = useState<boolean>(false);
   const [history, setHistories] = useState<HistoryType[]>([]);
 
   const addProduct: ShoppingType["addProduct"] = useCallback(
@@ -134,10 +129,6 @@ const Provider: React.FC<{}> = (props) => {
     setOnToggleOverview(false);
   };
 
-  const isControlPopUpToggle: ShoppingType["isControlPopUpToggle"] = () => {
-    setOnTogglePopUp(!onTogglePopUp);
-  };
-
   const fetchData = async () => {
     const newProducts: ResponseType = await Axios.get(`/api/products`)
       .then((res) => res.data)
@@ -182,7 +173,6 @@ const Provider: React.FC<{}> = (props) => {
         overviewItem,
         onToggleOverview,
         onToggleAddItem,
-        onTogglePopUp,
         history,
         addProduct,
         addToCart,
@@ -190,7 +180,6 @@ const Provider: React.FC<{}> = (props) => {
         addToOverview,
         isControlToggleOverview,
         isControlToggleAddItem,
-        isControlPopUpToggle,
       }}
     >
       {props.children}
