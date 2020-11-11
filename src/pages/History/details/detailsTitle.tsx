@@ -29,7 +29,7 @@ const DetailsTitle = ({ item, id }: Props) => {
   const { goBack } = useHistory();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  const d = new Date(`${item.createdAt}`);
+  const itemDate = new Date(`${item.createdAt}`);
 
   const UpdateTheHistory = useCallback(
     (state) => {
@@ -73,13 +73,13 @@ const DetailsTitle = ({ item, id }: Props) => {
       <ShoppingDateContainer className="sub-title-date">
         <BsCalendar size="1.5rem" />
         <ShoppingDateDetail>
-          {days[d.getDay()] +
+          {days[itemDate.getDay()] +
             " " +
-            d.getMonth() +
+            itemDate.getMonth() +
             " " +
-            d.getDate() +
+            itemDate.getDate() +
             " " +
-            d.getFullYear()}
+            itemDate.getFullYear()}
         </ShoppingDateDetail>
       </ShoppingDateContainer>
       <CompleteContainer>
