@@ -16,7 +16,7 @@ interface Props {
 }
 
 const CartItem = ({ item }: Props) => {
-  const { removeFromCart, addToCart } = useContext(Shopping);
+  const { removeFromCart, addToCart, cartItemMinus } = useContext(Shopping);
   const [onToggleOperation, setOnToggleOperation] = useState(false);
 
   return (
@@ -40,7 +40,7 @@ const CartItem = ({ item }: Props) => {
             </CartItemOpBtn>
             <CartItemOpBtn
               onClick={() => {
-                // fonksiyon yaziver
+                cartItemMinus(item);
               }}
             >
               <FiMinus />

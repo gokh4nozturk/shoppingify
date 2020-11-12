@@ -37,6 +37,7 @@ export type ShoppingType = {
   isControlToggleAddItem: () => void;
   fetchData: () => void;
   getHistory: () => void;
+  cartItemMinus: (item: ProductType) => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -55,6 +56,7 @@ const DefaultShopping: ShoppingType = {
   isControlToggleAddItem: () => {},
   fetchData: () => {},
   getHistory: () => {},
+  cartItemMinus: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -97,6 +99,29 @@ const Provider: React.FC<{}> = (props) => {
             : i
         );
       }
+
+      setCart(cartItems);
+    },
+    [cart]
+  );
+
+  const cartItemMinus: ShoppingType["cartItemMinus"] = useCallback(
+    (item) => {
+      let cartItems = [...cart];
+      const itemCount = -1;
+      //check!! is there already product in cart if add to cart the product
+      const insideCartItem = cartItems.find((cartItem) => {
+        return cartItem._id === item._id;
+      });
+
+      if (insideCartItem.count > 1) {
+        cartItems = cartItems.map((i) =>
+          i._id === item._id
+            ? { ...insideCartItem, count: itemCount + insideCartItem.count }
+            : i
+        );
+      }
+
       setCart(cartItems);
     },
     [cart]
@@ -186,6 +211,7 @@ const Provider: React.FC<{}> = (props) => {
         isControlToggleAddItem,
         fetchData,
         getHistory,
+        cartItemMinus,
       }}
     >
       {props.children}
