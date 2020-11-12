@@ -22,15 +22,21 @@ interface Props {
 }
 
 const OverviewItem = ({ item }: Props) => {
-  const { addToCart, isControlToggleOverview } = useContext(Shopping);
+  const { addToCart, isControlToggleOverview, fetchData } = useContext(
+    Shopping
+  );
 
-  const DeleteItem = useCallback(async (id) => {
-    await Axios.delete(`api/product/${id}`)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  const DeleteItem = useCallback(
+    async (id) => {
+      await Axios.delete(`api/product/${id}`)
+        .then((res) => {
+          console.log(res);
+          fetchData(); //for any updates
+        })
+        .catch((err) => console.log(err));
+    },
+    [fetchData]
+  );
 
   return (
     <>
