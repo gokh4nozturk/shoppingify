@@ -19,6 +19,7 @@ import {
 
 import { ProductType } from "../../products/Product";
 import DetailsTitle from "./detailsTitle";
+import { useMount } from "react-use";
 
 export interface HistoryType {
   _id: string;
@@ -38,6 +39,7 @@ const Details = () => {
   const [listCategories, setListCategories] = useState<string[]>([]); //see the products' categories
 
   const fetchList = useCallback(async () => {
+    //fetch specific list
     const newList = await Axios.get(`/api/history/${id}`)
       .then((res) => res.data)
       .catch((err) => console.log(err));
@@ -47,6 +49,7 @@ const Details = () => {
   }, [id]);
 
   const fetchCategories = useCallback(() => {
+    //fetch the list's categories
     const category = historyProduct.reduce<string[]>((acc, cur) => {
       const { category } = cur;
       const isInState = acc.includes(category);
@@ -61,7 +64,7 @@ const Details = () => {
   useEffect(() => {
     fetchList();
     fetchCategories();
-  }, [fetchList, fetchCategories]);
+  }, []);
 
   const filteredProducts: ProductType[] = useMemo(() => {
     // Check if there is a filter
@@ -82,7 +85,7 @@ const Details = () => {
       </BtnBack>
 
       {list.map((item) => {
-        return <DetailsTitle item={item} id={id} />;
+        return <DetailsTitle item={item} id={id} fetchList={fetchList} />;
       })}
 
       <ProductsCategories>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Shopping } from "../../context";
-import { useTitle } from "react-use";
+import { useMount, useTitle } from "react-use";
 
 import {
   Container,
@@ -20,6 +20,8 @@ import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
 
 const History = () => {
+  const { getHistory } = useContext(Shopping);
+  useMount(() => getHistory()); //for any updates
   useTitle("History");
   const { history } = useContext(Shopping);
 

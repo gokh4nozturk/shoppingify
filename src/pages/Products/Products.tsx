@@ -15,6 +15,7 @@ import { useTitle } from "react-use";
 
 const Products = () => {
   useTitle("Shoppingify");
+
   const [filter, setFilter] = useState("");
   const { products, categories } = useContext(Shopping);
 

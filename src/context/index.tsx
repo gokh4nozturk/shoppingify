@@ -35,6 +35,8 @@ export type ShoppingType = {
   addToOverview: (item: ProductType) => void;
   isControlToggleOverview: (item: boolean) => void;
   isControlToggleAddItem: () => void;
+  fetchData: () => void;
+  getHistory: () => void;
 };
 
 const DefaultShopping: ShoppingType = {
@@ -51,6 +53,8 @@ const DefaultShopping: ShoppingType = {
   addToOverview: () => {},
   isControlToggleOverview: () => {},
   isControlToggleAddItem: () => {},
+  fetchData: () => {},
+  getHistory: () => {},
 };
 
 const Shopping = React.createContext(DefaultShopping);
@@ -129,7 +133,7 @@ const Provider: React.FC<{}> = (props) => {
     setOnToggleOverview(false);
   };
 
-  const fetchData = async () => {
+  const fetchData: ShoppingType["fetchData"] = async () => {
     const newProducts: ResponseType = await Axios.get(`/api/products`)
       .then((res) => res.data)
       .catch((e) => {
@@ -151,7 +155,7 @@ const Provider: React.FC<{}> = (props) => {
     setProducts(newProducts);
   };
 
-  const getHistory = async () => {
+  const getHistory: ShoppingType["getHistory"] = async () => {
     const newHistories: ResponseType2 = await Axios.get("/api/histories")
       .then((res) => res.data)
       .catch((err) => console.log(err));
@@ -180,6 +184,8 @@ const Provider: React.FC<{}> = (props) => {
         addToOverview,
         isControlToggleOverview,
         isControlToggleAddItem,
+        fetchData,
+        getHistory,
       }}
     >
       {props.children}

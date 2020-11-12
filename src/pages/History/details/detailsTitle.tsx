@@ -23,9 +23,10 @@ import {
 interface Props {
   item: HistoryType;
   id: string;
+  fetchList: () => void;
 }
 
-const DetailsTitle = ({ item, id }: Props) => {
+const DetailsTitle = ({ item, id, fetchList }: Props) => {
   const { goBack } = useHistory();
 
   const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -37,13 +38,14 @@ const DetailsTitle = ({ item, id }: Props) => {
         completed: state,
       })
         .then(function (response) {
+          fetchList(); // for any updates
           console.log(response);
         })
         .catch(function (error) {
           console.log(error);
         });
     },
-    [id]
+    [id, fetchList]
   );
 
   const DeleteTheHistory = useCallback(
