@@ -13,6 +13,7 @@ export const ProductsCategories = styled.div`
   grid-row: 2/3;
   display: flex;
   justify-content: space-evenly;
+  flex-wrap: wrap;
   align-items: center;
   background: #ffffff;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.05);
