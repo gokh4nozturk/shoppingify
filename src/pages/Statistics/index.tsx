@@ -3,7 +3,7 @@ import { useTitle } from "react-use";
 import { Shopping } from "../../context";
 import TwoSimplePieChart from "./charts/pieCategories";
 import DonutChartCard from "./charts/pieItems";
-import SimpleLineChart from "./charts/simpleLine";
+import SimpleLineChart from "./charts/lineMonthly/simpleLine";
 import {
   StatisticsContainer,
   TopContainer,

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 
 import { Provider } from "./context";
-import Products from "./pages/products/Products";
+import Products from "./pages/products";
 import Statistics from "./pages/statistics";
 import History from "./pages/history";
 import Details from "./pages/history/details/Details";
