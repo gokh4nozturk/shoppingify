@@ -1,6 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React from "react";
 import { useTitle } from "react-use";
-import { Shopping } from "../../context";
 import TwoSimplePieChart from "./charts/pieCategories";
 import DonutChartCard from "./charts/pieItems";
 import SimpleLineChart from "./charts/lineMonthly/simpleLine";
@@ -15,36 +14,17 @@ import {
 
 const Statistics = () => {
   useTitle("Statistics");
-  const { history } = useContext(Shopping);
-  const [topObjects, setTopObjects] = useState([]);
-
-  const fetchTopItems = useCallback(() => {
-    let histories = [...history];
-    // editing history's data for statistics
-    const objects = histories
-      .map((item) => item.listItem)
-      .flat()
-      .sort((a, b) => a.count - b.count)
-      .reverse()
-      .slice(0, 4);
-
-    setTopObjects(objects);
-  }, [history]);
-
-  useEffect(() => {
-    fetchTopItems();
-  }, []);
 
   return (
     <StatisticsContainer>
       <TopContainer>
         <TopItemsContainer>
           <StatisticsHeaders>Top Items</StatisticsHeaders>
-          <DonutChartCard topObjects={topObjects} />
+          <DonutChartCard />
         </TopItemsContainer>
         <TopCategoriesContainer>
           <StatisticsHeaders>Top Categories</StatisticsHeaders>
-          <TwoSimplePieChart topObjects={topObjects} />
+          <TwoSimplePieChart />
         </TopCategoriesContainer>
       </TopContainer>
       <MonthlyContainer>

@@ -1,39 +1,48 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import { Pie, PieChart } from "recharts";
-import { ProductType } from "../../../../context";
+import { Shopping } from "../../../../context";
 import { Card, ChartLabel, ChartLabelValue, ChartWrapper } from "./styled";
-
-interface Props {
-  topObjects: ProductType[];
-}
 
 type data = {
   name: string;
   value: number;
+  fill: string;
 };
 
-const DonutChartCard = ({ topObjects }: Props) => {
+const DonutChartCard = () => {
+  const { history } = useContext(Shopping);
   const [active, setActive] = useState("");
   const [mouseOver, setMouseOver] = useState(false);
   const [data, setData] = useState<data[]>([]);
 
-  const editData = useCallback(() => {
-    const items = [...topObjects];
-    const ass: data = Object.create({});
-    items.map((item) => {
-      return (ass.name = item.name);
+  const fetchTopItems = useCallback(() => {
+    const histories = [...history];
+
+    // editing history's data for statistics
+    const objects = histories
+      .map((item) => item.listItem)
+      .flat()
+      .sort((a, b) => a.count - b.count)
+      .reverse()
+      .slice(0, 3);
+
+    const items = [...objects];
+    const ass = items.map((item) => {
+      return {
+        name: item.name,
+        value: item.count,
+        fill: "#" + (((1 << 24) * Math.random()) | 0).toString(16),
+      };
     });
 
-    setData([ass]);
-  }, [topObjects]);
+    setData(ass);
+  }, [history]);
 
   const activeItem = data.find((obj) => obj.name === active);
 
   useEffect(() => {
-    console.log(data);
-
-    editData();
-  }, []);
+    fetchTopItems();
+  }, [fetchTopItems]);
 
   return (
     <Card>
@@ -52,7 +61,6 @@ const DonutChartCard = ({ topObjects }: Props) => {
             strokeWidth={0}
             innerRadius={95}
             outerRadius={125}
-            fill="#292929"
             onMouseEnter={(e) => {
               setActive(e.name);
               setMouseOver(true);
