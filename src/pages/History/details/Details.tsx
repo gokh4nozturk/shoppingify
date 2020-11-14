@@ -19,7 +19,6 @@ import {
 
 import { ProductType } from "../../products/Product";
 import DetailsTitle from "./detailsTitle";
-import { useMount } from "react-use";
 
 export interface HistoryType {
   _id: string;
