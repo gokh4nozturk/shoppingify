@@ -1,28 +1,48 @@
-import React from "react";
-import { useLocalStorage, useTitle } from "react-use";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useTitle } from "react-use";
+import { Shopping } from "../../context";
+import TwoSimplePieChart from "./pieCategories";
+import DonutChartCard from "./pieItems";
+import SimpleLineChart from "./simpleLine";
 import {
   StatisticsContainer,
   TopContainer,
   TopItemsContainer,
   TopCategoriesContainer,
   MonthlyContainer,
+  StatisticsHeaders,
 } from "./styled";
 
 const Statistics = () => {
-  const [value, setValue, remove] = useLocalStorage("my-key", "foo");
   useTitle("Statistics");
+  const { history } = useContext(Shopping);
+  const [topItems, setTopItems] = useState([]);
+  const [topCategories, setTopCategories] = useState([]);
+
+  const fetchTopItems = useCallback(() => {
+    const data = history.map((item) => item.listItem).slice();
+    console.log([...data]);
+  }, [history]);
+
+  useEffect(() => {
+    fetchTopItems();
+  });
+
   return (
     <StatisticsContainer>
       <TopContainer>
-        <TopItemsContainer>Items</TopItemsContainer>
-        <TopCategoriesContainer>Categories</TopCategoriesContainer>
+        <TopItemsContainer>
+          <StatisticsHeaders>Top Items</StatisticsHeaders>
+          <DonutChartCard />
+        </TopItemsContainer>
+        <TopCategoriesContainer>
+          <StatisticsHeaders>Top Categories</StatisticsHeaders>
+          <TwoSimplePieChart />
+        </TopCategoriesContainer>
       </TopContainer>
       <MonthlyContainer>
-        <div>Value: {value}</div>
-        <button onClick={() => setValue("bar")}>bar</button>
-        <button onClick={() => setValue("baz")}>baz</button>
-        <button onClick={() => remove()}>Remove</button>
-        Monthly
+        <StatisticsHeaders>Monthly Summary</StatisticsHeaders>
+        <SimpleLineChart />
       </MonthlyContainer>
     </StatisticsContainer>
   );

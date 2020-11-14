@@ -31,3 +31,8 @@ export const MonthlyContainer = styled.div`
   display: grid;
   place-items: center;
 `;
+
+export const StatisticsHeaders = styled.p`
+  font-size: 24px;
+  font-weight: 500;
+`;

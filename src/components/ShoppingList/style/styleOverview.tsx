@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const OverviewContainer = styled.div`
   display: grid;
   grid-template-rows: 3rem 1fr 5rem;
-  grid-gap: 2rem;
+  grid-gap: 2em;
   height: 100%;
   width: 100%;
   background: white;
