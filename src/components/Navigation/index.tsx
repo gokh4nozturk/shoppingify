@@ -16,13 +16,22 @@ const Navigation = () => {
       </div>
       <div className="nav-item screens">
         <Link to={"/"} className="nav-links">
-          <MdList size="1.5em" className="screen-item" />
+          <div className="tooltip">
+            <MdList size="1.5em" className="screen-item" />
+            <span className="tooltiptext">items</span>
+          </div>
         </Link>
         <Link to={"/history"} className="nav-links">
-          <MdReplay size="1.5em" className="screen-item" />
+          <div className="tooltip">
+            <MdReplay size="1.5em" className="screen-item" />
+            <span className="tooltiptext">history</span>
+          </div>
         </Link>
         <Link to={"/statistics"} className="nav-links">
-          <BiStats size="1.5em" className="screen-item" />
+          <div className="tooltip">
+            <BiStats size="1.5em" className="screen-item" />
+            <span className="tooltiptext">statistics</span>
+          </div>
         </Link>
       </div>
       <div className="nav-item cart">
