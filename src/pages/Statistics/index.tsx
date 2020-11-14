@@ -1,9 +1,9 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useTitle } from "react-use";
 import { Shopping } from "../../context";
-import TwoSimplePieChart from "./pieCategories";
-import DonutChartCard from "./pieItems";
-import SimpleLineChart from "./simpleLine";
+import TwoSimplePieChart from "./charts/pieCategories";
+import DonutChartCard from "./charts/pieItems";
+import SimpleLineChart from "./charts/simpleLine";
 import {
   StatisticsContainer,
   TopContainer,
