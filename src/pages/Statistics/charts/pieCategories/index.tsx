@@ -1,6 +1,7 @@
 import React from "react";
 
 import { PieChart, Pie, Tooltip } from "recharts";
+import { ProductType } from "../../../../context";
 
 const data01 = [
   { name: "Group A", value: 40, fill: "#84d88b" },
@@ -9,7 +10,11 @@ const data01 = [
   { name: "Group D", value: 20, fill: "#8884d8" },
 ];
 
-const TwoSimplePieChart = () => {
+interface Props {
+  topObjects: ProductType[];
+}
+
+const TwoSimplePieChart = ({ topObjects }: Props) => {
   return (
     <PieChart width={400} height={400}>
       <Pie

@@ -1,19 +1,39 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { Pie, PieChart } from "recharts";
+import { ProductType } from "../../../../context";
 import { Card, ChartLabel, ChartLabelValue, ChartWrapper } from "./styled";
 
-const data = [
-  { name: "Lost", value: 672, fill: "#292929" },
-  { name: "Strong", value: 462, fill: "#b239dc" },
-  { name: "Moderate", value: 127, fill: "#028ffb" },
-  { name: "Low", value: 41, fill: "#68d4a2" },
-];
+interface Props {
+  topObjects: ProductType[];
+}
 
-const DonutChartCard = () => {
+type data = {
+  name: string;
+  value: number;
+};
+
+const DonutChartCard = ({ topObjects }: Props) => {
   const [active, setActive] = useState("");
   const [mouseOver, setMouseOver] = useState(false);
+  const [data, setData] = useState<data[]>([]);
+
+  const editData = useCallback(() => {
+    const items = [...topObjects];
+    const ass: data = Object.create({});
+    items.map((item) => {
+      return (ass.name = item.name);
+    });
+
+    setData([ass]);
+  }, [topObjects]);
 
   const activeItem = data.find((obj) => obj.name === active);
+
+  useEffect(() => {
+    console.log(data);
+
+    editData();
+  }, []);
 
   return (
     <Card>
@@ -22,16 +42,17 @@ const DonutChartCard = () => {
           {activeItem && activeItem.name}
           <ChartLabelValue>{active !== "" && activeItem.value}</ChartLabelValue>
         </ChartLabel>
-        <PieChart width={250} height={300}>
+        <PieChart width={300} height={300}>
           <Pie
             dataKey="value"
             isAnimationActive={true}
+            data={data}
             startAngle={90}
             endAngle={450}
             strokeWidth={0}
-            data={data}
-            innerRadius={100}
+            innerRadius={95}
             outerRadius={125}
+            fill="#292929"
             onMouseEnter={(e) => {
               setActive(e.name);
               setMouseOver(true);

@@ -16,28 +16,35 @@ import {
 const Statistics = () => {
   useTitle("Statistics");
   const { history } = useContext(Shopping);
-  const [topItems, setTopItems] = useState([]);
-  const [topCategories, setTopCategories] = useState([]);
+  const [topObjects, setTopObjects] = useState([]);
 
   const fetchTopItems = useCallback(() => {
-    const data = history.map((item) => item.listItem).slice();
-    console.log([...data]);
+    let histories = [...history];
+    // editing history's data for statistics
+    const objects = histories
+      .map((item) => item.listItem)
+      .flat()
+      .sort((a, b) => a.count - b.count)
+      .reverse()
+      .slice(0, 4);
+
+    setTopObjects(objects);
   }, [history]);
 
   useEffect(() => {
     fetchTopItems();
-  });
+  }, []);
 
   return (
     <StatisticsContainer>
       <TopContainer>
         <TopItemsContainer>
           <StatisticsHeaders>Top Items</StatisticsHeaders>
-          <DonutChartCard />
+          <DonutChartCard topObjects={topObjects} />
         </TopItemsContainer>
         <TopCategoriesContainer>
           <StatisticsHeaders>Top Categories</StatisticsHeaders>
-          <TwoSimplePieChart />
+          <TwoSimplePieChart topObjects={topObjects} />
         </TopCategoriesContainer>
       </TopContainer>
       <MonthlyContainer>
