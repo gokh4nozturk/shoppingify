@@ -5,7 +5,11 @@ import { Shopping } from "../../../../context";
 
 const data01 = [
   { name: "Group A", value: 40, fill: "#84d88b" },
-  { name: "Group B", value: 30, fill: "#d884c3" },
+  {
+    name: "Group B",
+    value: 30,
+    fill: "hsl(315, 51.85185185185185%, 68.23529411764706%)",
+  },
   { name: "Group C", value: 30, fill: "#bd84d8" },
   { name: "Group D", value: 20, fill: "#8884d8" },
 ];
@@ -36,11 +40,11 @@ const TwoSimplePieChart = () => {
       return { name: item, value: count + 1 };
     });
 
-    const topCategories = newCategories.map((item, index) =>
-      item === newCategories[index - 1] ? null : "ok"
-    );
+    // const topCategories = newCategories.find((item, index) =>
+    //   item.value > newCategories[index - 1].value ? item : null
+    // );
 
-    console.log(newCategories);
+    // console.log("topCategories");
   }, [history]);
 
   useEffect(() => {

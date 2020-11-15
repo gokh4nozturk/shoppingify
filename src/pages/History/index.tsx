@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Shopping } from "../../context";
 import { useMount, useTitle } from "react-use";
@@ -15,13 +15,18 @@ import {
   ShoppingDateDetail,
   ShoppingState,
   border,
+  DataContainer,
 } from "./style/styledIndex";
 import { FaChevronRight } from "react-icons/fa";
 import { BsCalendar } from "react-icons/bs";
 
 const History = () => {
   const { getHistory } = useContext(Shopping);
-  useMount(() => getHistory()); //for any updates
+  useEffect(() => {
+    getHistory();
+    return () => {};
+  }, []);
+
   useTitle("History");
   const { history } = useContext(Shopping);
 
@@ -43,47 +48,53 @@ const History = () => {
   return (
     <>
       <Container>
-        <Title>Shopping history</Title>
-        {history.map((item) => {
-          return (
-            <ResultsContainer key={item._id}>
-              <ResultsMonth>
-                {`${months[new Date(item.createdAt).getMonth()]} ` +
-                  new Date(item.createdAt).getFullYear()}
-              </ResultsMonth>
-              <ShoppingContainer>
-                <ShoppingName>{item.name}</ShoppingName>
+        <Title>
+          <p>Shopping history</p>
+        </Title>
+        <DataContainer>
+          {history.map((item) => {
+            return (
+              <ResultsContainer key={item._id}>
+                <ResultsMonth>
+                  {`${months[new Date(item.createdAt).getMonth()]} ` +
+                    new Date(item.createdAt).getFullYear()}
+                </ResultsMonth>
+                <ShoppingContainer>
+                  <ShoppingName>{item.name}</ShoppingName>
 
-                <DetailPartSecond>
-                  <ShoppingDateContainer>
-                    <BsCalendar size="1.5rem" />
-                    <ShoppingDateDetail>
-                      {new Date(item.createdAt).getMonth() +
-                        "." +
-                        new Date(item.createdAt).getDate() +
-                        "." +
-                        new Date(item.createdAt).getFullYear()}
-                    </ShoppingDateDetail>
-                  </ShoppingDateContainer>
-                  <ShoppingState
-                    color={item.completed ? border.completed : border.cancelled}
-                  >
-                    {item.completed ? `completed` : `cancelled`}
-                  </ShoppingState>
-                  <Link to={`history/${item._id}`}>
-                    <FaChevronRight
-                      size="1.5rem"
-                      style={{
-                        textDecoration: "none",
-                        color: "#F9A109",
-                      }}
-                    />
-                  </Link>
-                </DetailPartSecond>
-              </ShoppingContainer>
-            </ResultsContainer>
-          );
-        })}
+                  <DetailPartSecond>
+                    <ShoppingDateContainer>
+                      <BsCalendar size="1.5rem" />
+                      <ShoppingDateDetail>
+                        {new Date(item.createdAt).getMonth() +
+                          "." +
+                          new Date(item.createdAt).getDate() +
+                          "." +
+                          new Date(item.createdAt).getFullYear()}
+                      </ShoppingDateDetail>
+                    </ShoppingDateContainer>
+                    <ShoppingState
+                      color={
+                        item.completed ? border.completed : border.cancelled
+                      }
+                    >
+                      {item.completed ? `completed` : `cancelled`}
+                    </ShoppingState>
+                    <Link to={`history/${item._id}`}>
+                      <FaChevronRight
+                        size="1.5rem"
+                        style={{
+                          textDecoration: "none",
+                          color: "#F9A109",
+                        }}
+                      />
+                    </Link>
+                  </DetailPartSecond>
+                </ShoppingContainer>
+              </ResultsContainer>
+            );
+          })}
+        </DataContainer>
       </Container>
     </>
   );

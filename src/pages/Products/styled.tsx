@@ -46,9 +46,6 @@ export const ProductsTitle = styled.div`
     color: ${({ theme }) => theme.colors.primary};
   }
 `;
-export const SearchBox = styled.div`
-  grid-column: 2/3;
-`;
 
 export const ProductsView = styled.div`
   grid-row: 3/4;

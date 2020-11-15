@@ -6,12 +6,14 @@ export const Container = styled.div`
   width: 100%;
 `;
 
-export const Title = styled.p`
+export const Title = styled.div`
   color: #34333a;
   font-weight: bold;
 
   font-size: ${({ theme }) => theme.fontSizes.xLarge};
 `;
+
+export const DataContainer = styled.div``;
 
 export const ResultsContainer = styled.div``;
 

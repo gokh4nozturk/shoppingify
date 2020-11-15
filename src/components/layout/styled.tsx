@@ -25,6 +25,8 @@ export const Container = styled.section`
   .part-products {
     grid-column: 2/3;
     padding: 0 5em;
+    overflow-y: auto;
+    padding-bottom: 1.875em;
   }
   .part-shopping-list {
     grid-column: 3/4;

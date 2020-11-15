@@ -8,10 +8,10 @@ import {
   ProductsCategories,
   ProductsCategory,
   ProductsTitle,
-  SearchBox,
 } from "./styled";
 import { ProductType, Shopping } from "../../context";
 import { useTitle } from "react-use";
+import SearchBox from "../../components/searchBox";
 
 const Products = () => {
   useTitle("Shoppingify");
@@ -32,13 +32,11 @@ const Products = () => {
   return (
     <ProductsContainer>
       <ProductsTop>
-        <ProductsTitle className="title">
+        <ProductsTitle>
           <p className="shoppingify">Shoppingify </p>
           <p> allows you take your shopping list wherever you go</p>
         </ProductsTitle>
-        <SearchBox className="search-box">
-          <input type="search" name="" id="" />
-        </SearchBox>
+        <SearchBox />
       </ProductsTop>
       <ProductsCategories>
         {/* Mapping categories for filtering */}

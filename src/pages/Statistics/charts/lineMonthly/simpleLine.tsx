@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 import {
   LineChart,
@@ -10,8 +10,9 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { Shopping } from "../../../../context";
 
-const data = [
+const data2 = [
   { item: 24, name: "January" },
   { item: 13, name: "February" },
   { item: 98, name: "March" },
@@ -26,7 +27,54 @@ const data = [
   { item: 48, name: "December" },
 ];
 
+type data = {
+  name: string;
+  item: number;
+};
+
 const SimpleLineChart = () => {
+  const { history } = useContext(Shopping);
+
+  const [data, setData] = useState<data[]>([]);
+
+  const fetchItemsMonthly = useCallback(() => {
+    // editing history's data for statistics
+    const histories = [...history];
+    const objects = histories.map((item) => new Date(item.createdAt));
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    const items = [...objects];
+    let count = 0;
+
+    const newMonths = items.map((item, index) => {
+      if (item === items[index - 1]) {
+        count++;
+      } else count = 0;
+      return { name: months[item.getMonth()], item: count + 1 };
+    });
+
+    setData(newMonths);
+    console.log(newMonths);
+  }, [history]);
+
+  useEffect(() => {
+    fetchItemsMonthly();
+  }, []);
+
   return (
     <div style={{ width: "100%", height: 300 }}>
       <ResponsiveContainer>
