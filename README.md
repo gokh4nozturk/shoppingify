@@ -52,6 +52,8 @@ Introduce your projects by taking a screenshot or a gif. Try to tell visitors a 
 
 - [React](https://reactjs.org/)
 - [React Icons](https://react-icons.github.io/react-icons/)
+- [Styled-Components](https://styled-components.com/)
+- [Recharts](http://recharts.org/en-US)
 
 ## Features
 
