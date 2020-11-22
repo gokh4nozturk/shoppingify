@@ -43,13 +43,9 @@ const Details = () => {
       .then((res) => res.data)
       .catch((err) => console.log(err));
 
-    setList([newList]);
-    setHistoryProduct(newList.listItem);
-  }, [id]);
+    const data: ProductType[] = newList.listItem;
 
-  const fetchCategories = useCallback(() => {
-    //fetch the list's categories
-    const category = historyProduct.reduce<string[]>((acc, cur) => {
+    const category = data.reduce<string[]>((acc, cur) => {
       const { category } = cur;
       const isInState = acc.includes(category);
       if (isInState) {
@@ -57,12 +53,14 @@ const Details = () => {
       }
       return [...acc, category];
     }, []);
+
+    setList([newList]);
+    setHistoryProduct(data);
     setListCategories(category);
-  }, [historyProduct]);
+  }, [id]);
 
   useEffect(() => {
     fetchList();
-    fetchCategories();
   }, []);
 
   const filteredProducts: ProductType[] = useMemo(() => {

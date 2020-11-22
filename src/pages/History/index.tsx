@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Shopping } from "../../context";
-import { useMount, useTitle } from "react-use";
+import { useTitle } from "react-use";
 
 import {
   Container,

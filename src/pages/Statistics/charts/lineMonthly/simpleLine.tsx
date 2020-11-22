@@ -68,7 +68,6 @@ const SimpleLineChart = () => {
     });
 
     setData(newMonths);
-    console.log(newMonths);
   }, [history]);
 
   useEffect(() => {
@@ -79,7 +78,7 @@ const SimpleLineChart = () => {
     <div style={{ width: "100%", height: 300 }}>
       <ResponsiveContainer>
         <LineChart
-          data={data}
+          data={data2}
           margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
         >
           <XAxis dataKey="name" />
